@@ -1,0 +1,45 @@
+.IP-container {
+    display: inline-flex;
+    flex-direction: column;
+    border: 2px solid #000000;
+    flex: 0 0 10%;
+    height: 500px;
+    margin-left: 10px;
+    margin-top: 30px;
+    background: #444343;
+    padding: 10px;
+}
+
+.IP-object {
+    display: inline-flex;
+    border-radius: 10%;
+    border: 3px solid #000000;
+    flex: 0 0 10%;
+    align-items: center;
+    justify-content: center;
+    background: rgb(69, 148, 69);
+    margin-bottom: 10px;
+}
+
+.voyant {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 3px solid #f1f1f1;
+    margin: 0 5px;
+    background: #d41010;
+}
+
+.voyant.active {
+    background: rgb(54, 221, 13);
+}
+
+.IP-container .IP-object .IP-label {
+    margin-right: 1px;
+    font-size: 0.5em;
+}
+
+.host-IP-label {
+    position: absolute;
+    margin-left: 10px;
+}

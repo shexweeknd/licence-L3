@@ -1,0 +1,30 @@
+nav {
+    display: flex;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    align-items: center;
+    justify-content: center;
+    background: #141313;
+    width: 100%;
+}
+nav:not(:first-of-type){
+    margin-top: 200px;
+}
+
+nav a {
+    color: #f1f1f1;
+    text-decoration: none;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin:0 10px;
+}
+
+body {
+    background: #f1f1f1;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+}
+
+.disconnect-button {
+    align-self: flex-end;
+}

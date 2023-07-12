@@ -1,0 +1,37 @@
+.videos-container {
+    max-width: 1300px;
+    padding: 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+.item {
+  flex: 0 0 48%; /* Changer le pourcentage en fonction de vos besoins */
+  padding: 1px;
+  box-sizing: border-box;
+  border: 1px solid #000000;
+  border-radius: 2%;
+  margin-left: 10px;
+  margin-bottom: 2px;
+  margin-top: 5px
+}
+.item video {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  /* Modifier les règles pour les écrans plus petits */
+  .item {
+    flex-basis: 50%; /* Changer la taille en fonction de vos besoins */
+  }
+}
+
+@media (max-width: 480px) {
+  /* Modifier les règles pour les écrans encore plus petits */
+  .item {
+    flex-basis: 100%; /* Changer la taille en fonction de vos besoins */
+  }
+}
