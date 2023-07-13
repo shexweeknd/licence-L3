@@ -4,11 +4,10 @@ import Contexte from '../../contexts/Context.js';
 import React, { useContext } from 'react';
 
 function VideoContainer() {
-
-    const { data, currentSalle } = useContext(Contexte)
+    const { data, currentSalle, setCurrentSalle } = useContext(Contexte)
 
     //animation
-    const trail = useTrail(data[0].src.length, {
+    const trail = useTrail(4, {
             from: {
                 opacity:0,
                 x: 20,

@@ -1,4 +1,4 @@
-import { fetchUsersData } from '../../services/api';
+import { fetchData } from '../../services/api';
 import { useEffect, useState } from 'react';
 
 export default function Logs() {
@@ -9,7 +9,7 @@ export default function Logs() {
     () => {
       async function fetchUsers() {
         try {
-          const usersData = await fetchUsersData();
+          const usersData = await fetchData('/api/users');
           setData(usersData)
           // Effectuer le traitement des données ici
         } catch (error) {
@@ -24,10 +24,10 @@ export default function Logs() {
   return (
     <section>
       <p>
-        id: {data[0].id}
+        id: {}
         <br />
-        name: {data[0].name}
+        name: {}
       </p>
     </section>
-  );
+  )
 }

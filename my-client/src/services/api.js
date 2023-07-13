@@ -15,9 +15,9 @@ export const fetchOneUserData = async (userId) => {
   }
 };
 
-export const fetchUsersData = async () => {
+export const fetchData = async (apiLink) => {
     try {
-      const response = await API.get('/api/users');
+      const response = await API.get(`${apiLink}`);
       return response.data;
     } catch (error) {
       console.error('Une erreur s\'est produite lors de la récupération des données utilisateur :', error);
