@@ -5,6 +5,10 @@
 /my-client/.pnp
 /my-client/pnp.js
 
+/my-server/node_modules
+/my-server/.pnp
+/my-server/pnp.js
+
 # testing
 /my-client/coverage
 
