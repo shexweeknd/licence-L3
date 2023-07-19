@@ -1,10 +1,10 @@
 import './VideoContainer.css';
 import { useTrail, animated } from 'react-spring'
-import Contexte from '../../contexts/Context.js';
+import { SurveillanceContext } from '../../contexts/Context.js';
 import React, { useContext } from 'react';
 
 function VideoContainer() {
-    const { data, currentSalle, setCurrentSalle } = useContext(Contexte)
+    const { data, currentSalle, setCurrentSalle } = useContext(SurveillanceContext)
 
     //animation
     const trail = useTrail(4, {

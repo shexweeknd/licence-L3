@@ -1,0 +1,12 @@
+
+section {
+    display: flex;
+    position: relative;
+}
+
+@media screen and (max-width: 720px) {
+    section {
+        flex-direction: column;
+        column-count: 1;
+    }
+}

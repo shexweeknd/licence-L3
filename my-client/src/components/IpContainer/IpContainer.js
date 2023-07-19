@@ -1,9 +1,9 @@
 import './IpContainer.css'
-import Contexte from '../../contexts/Context.js'
+import { SurveillanceContext } from '../../contexts/Context.js'
 import React, { useContext } from 'react'
 
 function IpContainer() {
-  const { data, currentSalle, setCurrentSalle } = useContext(Contexte);
+  const { data, currentSalle, setCurrentSalle } = useContext(SurveillanceContext);
 
   const handleClick = (salle) => {
     setCurrentSalle(salle);

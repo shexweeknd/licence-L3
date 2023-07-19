@@ -1,0 +1,13 @@
+section {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+@media screen and (max-width: 720px) {
+    section {
+        flex-direction: column;
+        column-count: 1;
+    }
+}

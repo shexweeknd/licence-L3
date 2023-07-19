@@ -4,7 +4,7 @@ import VideoContainer from '../../components/VideoContainer/VideoContainer.js'
 function Surveillance() {
     return (
         <>
-        <section style={{display: 'flex', position: 'relative'}}>
+        <section style={{ display: 'flex', position: 'relative' }}>
             <IpContainer/>
             <VideoContainer/>
         </section >

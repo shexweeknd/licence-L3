@@ -1,0 +1,33 @@
+.logs-video-container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+}
+
+.logs-video-container video {
+    margin: 10px;
+}
+
+.logs-video-container .info {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    background: #333333;
+    border-radius: 0.5%;
+}
+.logs-video-container .info div {
+    width: 50%;
+}
+
+.logs-video-container .info div p {
+    text-align: left;
+    font-size: 0.3em;
+}
+
+@media screen and (max-width: 720px) {
+    .logs-video-container {
+        width: 100%;
+    }
+
+}

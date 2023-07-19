@@ -47,5 +47,25 @@ router.get('/rooms', (req, res) => {
   res.json(data);
 });
 
+// Route GET pour obtenir tous les metadata logs
+router.get('/logsdata', (req, res) => {
+  // Logique pour récupérer les logs
+  const data = [
+    {
+      name: "A-Cam1-100223-12:17",
+      date: "10/02/2023",
+      hour: "12:00 - 17h:00",
+      size: "300MB",
+      url: "http://192.168.10.2:6000",
+      room: "amphi",
+      ip: '192.168.10.2',
+      shape: "1920x1080p",
+      type: "video/mp4",
+    },
+  ];
+  // Envoie les metadata video logs en réponse
+  res.json(data);
+});
+
 // Exporte les routes
 module.exports = router;
