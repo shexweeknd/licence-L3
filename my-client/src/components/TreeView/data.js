@@ -9,15 +9,39 @@ export const treeData = {
         type: "folder",
         children: [
           {
-            name: "Video 1",
-            path: "/backup/Janvier/Video_1.mp4",
-            type: "file",
+            name: "1",
+            path: "/backup/Janvier/1",
+            type: "folder",
+            children: [
+              {
+                name: "Video 1",
+                path: "/backup/Janvier/Video_1.mp4",
+                type: "file",
+              },
+              {
+                name: "Video 2",
+                path: "/backup/Janvier/Video_2.mp4",
+                type: "file",
+              },
+            ]
           },
           {
-            name: "Video 2",
-            path: "/backup/Janvier/Video_2.mp4",
-            type: "file",
-          },
+            name: "2",
+            path: "/backup/Janvier/2",
+            type: "folder",
+            children: [
+              {
+                name: "Video 1",
+                path: "/backup/Janvier/Video_1.mp4",
+                type: "file",
+              },
+              {
+                name: "Video 2",
+                path: "/backup/Janvier/Video_2.mp4",
+                type: "file",
+              },
+            ]
+          }
         ],
       },
       {

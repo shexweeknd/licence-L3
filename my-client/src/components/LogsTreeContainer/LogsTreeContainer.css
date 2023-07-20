@@ -11,12 +11,11 @@
     flex-direction: column;
     flex-grow: 1;
     flex-shrink: 1;
+    align-items: baseline;
     overflow-x: hidden;
     overflow-y: auto;
     scroll-behavior: smooth;
     height: 530px;
-    justify-content: center;
-    align-items: center;
     margin: 10px;
     border: 2px solid;
     border-radius: 2%;
