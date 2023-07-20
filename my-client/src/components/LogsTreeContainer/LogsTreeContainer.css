@@ -7,12 +7,22 @@
 
 .tree {
     position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth;
     height: 530px;
     justify-content: center;
     align-items: center;
     margin: 10px;
     border: 2px solid;
-    border-radius: 2%;;
+    border-radius: 2%;
+    font-size: 87.5%;
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
 }
 
 .button-container {
