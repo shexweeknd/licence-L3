@@ -1,12 +1,12 @@
 
-section {
+.surveillance-section {
     display: flex;
     position: relative;
 }
 
 @media screen and (max-width: 720px) {
-    section {
-        flex-direction: column;
+    .surveillance-section {
+        flex-direction: column-reverse;
         column-count: 1;
     }
 }

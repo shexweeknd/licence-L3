@@ -1,5 +1,4 @@
 .container {
-    background: #adaaaa;
     opacity: 1;
     display: flex;
     flex-direction: column;
@@ -8,7 +7,7 @@
 
 .tree {
     position: relative;
-    height: 450px;
+    height: 530px;
     justify-content: center;
     align-items: center;
     margin: 10px;
@@ -25,7 +24,23 @@
 
 button {
     border-radius: 30%;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+    transition: width 0.5s, height 0.5s;
+}
+
+button:hover {
+    width: 50px;
+    height: 45px;
+    background-color: #adaaaa;
+}
+
+button img {
+    width: 20px;
+    height: 20px;
 }
 
 @media screen and (max-width: 720px) {

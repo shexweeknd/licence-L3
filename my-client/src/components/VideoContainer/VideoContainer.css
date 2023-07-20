@@ -9,6 +9,7 @@
   
 .item {
   flex: 0 0 48%; /* Changer le pourcentage en fonction de vos besoins */
+  cursor: pointer;
   padding: 1px;
   box-sizing: border-box;
   border: 1px solid #000000;
@@ -24,14 +25,12 @@
 
 @media (max-width: 768px) {
   /* Modifier les règles pour les écrans plus petits */
-  .item {
-    flex-basis: 50%; /* Changer la taille en fonction de vos besoins */
+  .item:first-of-type {
+    flex-basis: 98%; /* Changer la taille en fonction de vos besoins */
   }
-}
 
-@media (max-width: 480px) {
-  /* Modifier les règles pour les écrans encore plus petits */
   .item {
-    flex-basis: 100%; /* Changer la taille en fonction de vos besoins */
+    flex-basis: 30%;
+    margin-left: 0px;
   }
 }

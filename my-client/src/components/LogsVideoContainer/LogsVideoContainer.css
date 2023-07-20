@@ -7,6 +7,9 @@
 
 .logs-video-container video {
     margin: 10px;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    border-radius: 2%;
 }
 
 .logs-video-container .info {
@@ -22,7 +25,7 @@
 
 .logs-video-container .info div p {
     text-align: left;
-    font-size: 0.3em;
+    font-size: 0.5em;
 }
 
 @media screen and (max-width: 720px) {

@@ -1,5 +1,6 @@
 nav {
     display: flex;
+    position: relative;
     padding-top: 15px;
     padding-bottom: 15px;
     align-items: center;
@@ -7,16 +8,41 @@ nav {
     background: #141313;
     width: 100%;
 }
-nav:not(:first-of-type){
+
+nav:not(:first-of-type) {
     margin-top: 200px;
 }
 
 nav a {
     color: #f1f1f1;
+    position: relative;
     text-decoration: none;
     font-size: 0.75em;
     text-transform: uppercase;
-    margin:0 10px;
+    margin: 0 10px;
+    transition: font-size 0.5s;
+}
+
+nav a:hover {
+    font-size: 0.8em;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #adaaaa;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease;
+}
+
+nav a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
 
 body {

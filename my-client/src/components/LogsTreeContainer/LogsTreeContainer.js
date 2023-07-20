@@ -1,5 +1,8 @@
 import './LogsTreeContainer.css';
 
+import Delete from '../../assets/icons/delete.png';
+import Download from '../../assets/icons/download.png'
+
 export default function LogsVideoContainer() {
     return (
         <>
@@ -7,14 +10,15 @@ export default function LogsVideoContainer() {
             <div className="tree">
                 <p>contenu</p>
             </div>
-            <div className="button-container">
-                <button>
-                    <i className="material-icons">delete</i>
+            <form className="button-container">
+                <button id="delete">
+                    <img src={Delete} alt='delete'/>
+                </button> <nbpsp/>
+
+                <button id="download">
+                    <img src={Download} alt="download"/>
                 </button>
-                <button>
-                    <i className="material-icons">download</i>
-                </button>
-            </div>
+            </form>
         </div>
         </>
     )
