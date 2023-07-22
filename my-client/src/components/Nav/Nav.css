@@ -1,6 +1,7 @@
 nav {
     display: flex;
-    position: relative;
+    position: absolute;
+    top: 0%;
     padding-top: 15px;
     padding-bottom: 15px;
     align-items: center;

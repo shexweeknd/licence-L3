@@ -1,12 +1,12 @@
 
 .surveillance-section {
-    display: flex;
-    position: relative;
+    margin-top: 4%;
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 768px) {
     .surveillance-section {
         flex-direction: column-reverse;
         column-count: 1;
+        margin-top: 10%;
     }
 }
