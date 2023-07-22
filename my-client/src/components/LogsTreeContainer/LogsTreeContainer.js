@@ -15,7 +15,7 @@ export default function LogsVideoContainer() {
             <form className="button-container">
                 <button id="delete">
                     <img src={Delete} alt='delete'/>
-                </button> <nbpsp/>
+                </button>
 
                 <button id="download">
                     <img src={Download} alt="download"/>

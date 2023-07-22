@@ -5,16 +5,6 @@ const API = axios.create({
   baseURL: 'http://localhost:4000' // Remplace cette URL par l'URL réelle de ton API
 });
 
-export const fetchOneUserData = async (userId) => {
-  try {
-    const response = await API.get(`/users/${userId}`);
-    return response.data;
-  } catch (error) {
-    console.error('Une erreur s\'est produite lors de la récupération des données utilisateur :', error);
-    throw error;
-  }
-};
-
 export const fetchData = async (apiLink) => {
     try {
       const response = await API.get(`${apiLink}`);

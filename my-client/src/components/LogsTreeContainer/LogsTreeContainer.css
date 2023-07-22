@@ -32,6 +32,10 @@
     padding-bottom: 10px;
 }
 
+.button-container > button {
+    margin-right: 5px;
+}
+
 button {
     border-radius: 30%;
     width: 40px;
