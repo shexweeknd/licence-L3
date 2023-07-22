@@ -1,35 +1,44 @@
+import './TreeView.css';
+import ClosedFolder from '../../assets/icons/closed-folder.png';
+import OpenedFolder from '../../assets/icons/opened-folder.png';
+import Mp4File from '../../assets/icons/mp4-file.png';
+
 import { treeData } from "./data";
 import  { useState } from "react";
-import './TreeView.css'
 
-function Children({item}) {
+function Children({item, niveau}) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleToggle = () => {
     setIsExpanded(!isExpanded);
+    console.log(niveau)
   };
   
   return (
     <>
-      <div onClick={handleToggle} style={{ cursor: 'pointer' }}>
-        {isExpanded ? '▼ ' : '► '}
+      <div onClick={handleToggle} style={isExpanded ? {background: "#70b9d6", opacity: 0.85, cursor: "pointer"}: {cursor: "pointer"}}>
+        {isExpanded ? <img src={OpenedFolder}/> : <img src={ClosedFolder}/>}
         {item.name}
       </div>
-      {isExpanded && <TreeNode data={item.children} />}
+      {isExpanded && <TreeNode data={item.children} niveau={niveau+1}/>}
     </>
   )
 }
 
-const TreeNode = ({ data }, { parent }) => {
+const TreeNode = ({ data, niveau }) => {
 
+  console.log()
   return(
     <>
       {data.map((item) => (
-        <div key={item.path}>
+        <div key={item.path} className={`niveau-${niveau}`}>
           {item.type === 'folder' ? (
-            <Children item={item}/>
+            <Children item={item} niveau={niveau} />
           ) : (
-            <a href={item.path}>{item.name}</a>
+            <>
+              <img src={Mp4File}/>
+              <a href={item.path}>{item.name}</a>
+            </>
           )}
         </div>
       ))}
@@ -38,5 +47,5 @@ const TreeNode = ({ data }, { parent }) => {
 }
 
 export default function TreeView() {
-  return <TreeNode data={treeData.children} parent={"start"} />;
+  return <TreeNode data={treeData.children} niveau={1}/>;
 }

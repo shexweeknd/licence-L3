@@ -1,4 +1,5 @@
 import './LogsVideoContainer.css';
+
 import { useContext } from 'react';
 import { LogsContext } from '../../contexts/Context'
 
@@ -9,8 +10,8 @@ export default function LogsVideoContainer() {
     return (
         <>
         <div className="logs-video-container">
-            <video controls>
-            <source src={source} type={type}></source>
+            <video controls controlslist="nodownload">
+                <source src={source} type={type}></source>
             </video>
             <div className='info'>
                 <div>

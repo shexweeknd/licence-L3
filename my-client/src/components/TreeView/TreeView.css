@@ -1,0 +1,25 @@
+.tree {
+    padding: 10px;
+    max-height: 80%;
+}
+
+img {
+    width: 20px;
+    height: 20px;
+    padding-right: 5px;
+}
+
+div.niveau-1 {
+    width: 100%;
+    text-align: left;
+}
+
+div.niveau-2 {
+    width: 100%;
+    padding-left: 15%;
+}
+
+div.niveau-3 {
+    width: 100%;
+    padding-left: 25%;
+}
