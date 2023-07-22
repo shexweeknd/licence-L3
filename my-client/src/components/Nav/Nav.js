@@ -6,8 +6,14 @@ function Nav() {
     return (
         <>
             <nav>
-                <Link to="/">Surveillance</Link>
-                <Link to="/logs">Serveur Log</Link>
+                <div className="link-container">
+                    <Link to="/">Surveillance</Link>
+                </div>
+                
+                <div className="link-container">
+                    <Link to="/logs">Serveur Log</Link>
+                </div>
+                
                 {/* <button className="disconnect-button">
                     <img src ="" alt='déconnection'/>
                 </button> */}

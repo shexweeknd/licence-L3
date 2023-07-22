@@ -1,6 +1,10 @@
 .tree {
-    padding: 10px;
+    padding: 0 10px;
     max-height: 80%;
+}
+
+.tree div {
+    margin-top: 5px;
 }
 
 img {
