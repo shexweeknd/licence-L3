@@ -1,4 +1,7 @@
 import './TreeView.css';
+
+import Loading from '../Loading/Loading.js';
+
 import ClosedFolder from '../../assets/icons/closed-folder.png';
 import OpenedFolder from '../../assets/icons/opened-folder.png';
 import Mp4File from '../../assets/icons/mp4-file.png';
@@ -69,6 +72,6 @@ export default function TreeView() {
   console.log(treeData)
 
   return <>
-          {treeData[0] ? <TreeNode data={treeData[0].children} niveau={1}/> : <div>Chargement...</div>}
+          {treeData[0] ? <TreeNode data={treeData[0].children} niveau={1}/> : <Loading />}
           </>
 }

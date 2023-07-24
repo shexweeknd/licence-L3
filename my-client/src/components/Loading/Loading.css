@@ -1,0 +1,37 @@
+
+.loader-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+  }
+  .dot {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #000;
+    margin: 0 10px;
+  }
+  .d1 {
+    animation: loader infinite 0.5s alternate;
+  }
+  .d2 {
+    animation: loader infinite 0.5s 0.05s alternate;
+  }
+  .d3 {
+    animation: loader infinite 0.5s 0.1s alternate;
+  }
+  
+  .text-alternate {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  @keyframes loader {
+    100% {
+      transform: translateY(-30px)
+    }
+  }

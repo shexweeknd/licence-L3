@@ -1,11 +1,15 @@
-const express = require('express');
-const cors = require('cors'); //pour permettre d'echanger des iformations entre les domaines 'PORTS' du même origine
+const express = require("express");
+const http = require("http")
+const cors = require("cors"); //pour permettre d'echanger des iformations entre les domaines 'PORTS' du même origine
+const mongoose = require("mongoose");
 
-const router = require('./routes/api');
+require("dotenv").config();
+
+const router = require("./routes/authRoutes");
 // import database from './config/database';
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || process.env.DEV_PORT;
 
 // Active le middleware CORS, pas de sécuritée garantie
 app.use(cors());
@@ -16,17 +20,26 @@ app.use(cors());
 // Middleware pour parser les données en JSON
 app.use(express.json());
 
-// Routes API
 // On envoie une requete à un point de terminaison BASEURL + /api + route
-app.use('/api', router);
+app.use("/api", router);
 
 // Gestion des erreurs
 app.use((err, req, res, next) => {
   console.error(err);
-  res.status(500).json({ message: 'Erreur serveur' });
+  res.status(500).json({ message: "Erreur serveur" });
 });
 
-// Démarrage du serveur
-app.listen(port, () => {
-  console.log(`Serveur démarré sur le port ${port}`);
-});
+const server = http.createServer(app);
+
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(
+    // Démarrage du serveur
+    server.listen(port, () => {
+      console.log(`Serveur démarré sur le port ${port}`);
+    })
+  )
+  .catch((err) => {
+    console.log("Failed to connect to mongo");
+    console.log(err);
+  });

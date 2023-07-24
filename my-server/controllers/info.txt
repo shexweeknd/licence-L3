@@ -1,0 +1,1 @@
+ce dossier controller contient toute la logique du serveur, donc il doit contenir toutes les fonctions à executer au serveur ! 
