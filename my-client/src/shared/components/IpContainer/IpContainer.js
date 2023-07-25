@@ -1,5 +1,5 @@
 import './IpContainer.css'
-import { SurveillanceContext } from '../../contexts/Context.js'
+import { SurveillanceContext } from '../../../contexts/Context.js'
 import React, { useContext } from 'react'
 
 function IpContainer() {

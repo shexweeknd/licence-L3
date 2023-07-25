@@ -1,0 +1,64 @@
+.register-form {
+    display: flex;
+    flex-direction: column;
+    height: 45%;
+    justify-content: center;
+}
+
+label {
+    text-align: left;
+}
+
+.titre {
+    text-align: center;
+    color: black;
+    position: absolute;
+    top: 10%;
+    font-size: 1.3em;
+}
+
+.register-form input {
+    font-size: x-large;
+    margin-bottom: 0.8em;
+    border: 2px solid gray
+}
+
+.register-form a {
+    text-align: left;
+    margin-bottom: 0.8em;
+    border-radius: 15%;
+}
+
+.register-form .submit-container {
+    width: 100%;
+    position: relative;
+}
+
+.register-form .submit-button {
+    position: absolute;
+    cursor: pointer;
+    left: 30%;
+    width: 120px;
+    height: 50px;
+    border: 2px solid gray;
+    background-color: #282c34;
+    appearance: none;
+    transition: background-color 0.4s
+}
+
+.register-form .submit-button:hover {
+    background-color: #adaaaa;
+}
+
+.register-form a {
+    font-size: .9em;
+    transition: color 0.2s ease-in;
+}
+
+.register-form a:hover {
+    color: red;
+}
+
+.register-form span {
+    display: none;
+}

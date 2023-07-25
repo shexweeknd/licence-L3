@@ -3,7 +3,7 @@ import './LogsTreeContainer.css';
 import TreeView from '../TreeView/TreeView'
 
 import Delete from '../../assets/icons/delete.png';
-import Download from '../../assets/icons/download.png'
+import Download from '../../assets/icons/download.png';
 
 export default function LogsVideoContainer() {
     return (

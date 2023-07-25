@@ -1,7 +1,7 @@
 import "./Logs.css";
 
-import LogsVideoContainer from "../../components/LogsVideoContainer/LogsVideoContainer";
-import LogsTreeContainer from "../../components/LogsTreeContainer/LogsTreeContainer";
+import LogsVideoContainer from "../../shared/components/LogsVideoContainer/LogsVideoContainer";
+import LogsTreeContainer from "../../shared/components/LogsTreeContainer/LogsTreeContainer";
 
 export default function Logs() {
 

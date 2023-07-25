@@ -1,7 +1,7 @@
 import './LogsVideoContainer.css';
 
 import { useContext } from 'react';
-import { LogsContext } from '../../contexts/Context'
+import { LogsContext } from '../../../contexts/Context';
 
 export default function LogsVideoContainer() {
 

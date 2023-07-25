@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const authControllers = require("../controllers/auth/authControllers.js");
+const auth = require("../middleware/auth.js")
 
 // --------------validation des types de donnnées-------------
 const Joi = require("joi");
@@ -29,5 +30,10 @@ router.post(
   validator.body(LoginSchema),
   authControllers.controllers.postLogin
 );
+
+//protected route test 
+router.get('/app', auth, (req, res) => {
+  res.send("request passed")
+})
 
 module.exports = router;

@@ -1,7 +1,7 @@
 import './Surveillance.css';
 
-import IpContainer from '../../components/IpContainer/IpContainer.js'
-import VideoContainer from '../../components/VideoContainer/VideoContainer.js'
+import IpContainer from '../../shared/components/IpContainer/IpContainer.js'
+import VideoContainer from '../../shared/components/VideoContainer/VideoContainer.js'
 
 function Surveillance() {
     return (

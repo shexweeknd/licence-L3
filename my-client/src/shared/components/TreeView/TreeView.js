@@ -8,7 +8,7 @@ import Mp4File from '../../assets/icons/mp4-file.png';
 
 import  { useState, useEffect } from "react";
 
-import { fetchData } from "../../services/api";
+import { fetchData } from "../../../services/api";
 
 function Children({item, niveau}) {
   const [isExpanded, setIsExpanded] = useState(false);

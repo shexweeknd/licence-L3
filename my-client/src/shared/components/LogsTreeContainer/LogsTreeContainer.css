@@ -30,6 +30,7 @@
     align-items: center;
     margin-inline: auto;
     padding-bottom: 10px;
+    display: inline-block;
 }
 
 .button-container > button {

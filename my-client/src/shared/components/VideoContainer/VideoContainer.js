@@ -1,6 +1,6 @@
 import './VideoContainer.css';
 import { useTrail, animated } from 'react-spring'
-import { SurveillanceContext } from '../../contexts/Context.js';
+import { SurveillanceContext } from '../../../contexts/Context.js';
 import React, { useContext } from 'react';
 
 function VideoContainer() {
