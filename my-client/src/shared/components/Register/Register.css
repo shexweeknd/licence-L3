@@ -50,6 +50,10 @@ label {
     background-color: #adaaaa;
 }
 
+.register-form .submit-button:disabled {
+    background-color: #adaaaa;
+}
+
 .register-form a {
     font-size: .9em;
     transition: color 0.2s ease-in;

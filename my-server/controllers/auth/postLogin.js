@@ -1,12 +1,13 @@
 const User = require("../../models/user.js");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const postLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email.toLowerCase() });
 
-    if (user && (await bcrypt.compare(password, user.password))) {
+    if (user && bcrypt.compare(password, user.password)) {
          
       //creation du JWT token
       const token = jwt.sign(

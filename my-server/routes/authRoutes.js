@@ -33,7 +33,7 @@ router.post(
 
 //protected route test 
 router.get('/app', auth, (req, res) => {
-  res.send("request passed")
+  res.send("request passed for token")
 })
 
 module.exports = router;
