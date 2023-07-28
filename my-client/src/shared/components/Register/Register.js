@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { validateRegisterForm } from '../../utils/registerValidator';
 
-export default function Register() {
+export default function Register({setIsLogin}) {
 
   const [username, setUsername] = useState(" ");
   const [mail, setMail] = useState(" ");
@@ -94,7 +94,7 @@ export default function Register() {
           ></img>
         </div>
 
-        <a href="auth">Se connecter</a>
+        <a onClick={setIsLogin}>Se connecter</a>
 
         <span style={{ opacity: 1 }}>erreur</span>
 

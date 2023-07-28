@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { validateLoginForm } from "../../utils/authValidator";
 import { authUser } from "../../../services/api";
-import axios from 'axios';
 
 import "./Login.css";
 import EyePasswordHidden from "../../assets/icons/eye-password-hide.svg";
@@ -9,7 +8,7 @@ import EyePasswordShow from "../../assets/icons/eye-password-show.svg";
 
 import { passwordTextHint } from '../../assets/texts/login';
 
-export default function Login() {
+export default function Login({setIsLogin}) {
   const [mail, setMail] = useState(" ");
   const [password, setPassword] = useState(" ");
   const [shown, setShown] = useState(false);
@@ -71,7 +70,7 @@ export default function Login() {
           ></img>
         </div>
 
-        <a href="Register">S'inscrire</a>
+        <a onClick={setIsLogin}>S'inscrire</a>
 
         <span style={{ opacity: 1 }} ref={span}></span>
 
