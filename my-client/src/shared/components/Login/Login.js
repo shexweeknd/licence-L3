@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import { validateLoginForm } from "../../utils/authValidator";
 import { authUser } from "../../../services/api";
+import axios from 'axios';
+
 import "./Login.css";
 import EyePasswordHidden from "../../assets/icons/eye-password-hide.svg";
 import EyePasswordShow from "../../assets/icons/eye-password-show.svg";
 
-import { passwordTextHint } from '../../assets/texts/login'
+import { passwordTextHint } from '../../assets/texts/login';
 
 export default function Login() {
   const [mail, setMail] = useState(" ");
@@ -27,14 +29,16 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
 
     const userData = {
-      mail,
-      password,
+      email: mail,
+      password: password,
     };
-    console.log(userData);
+    let res = authUser(userData)
+
+    console.log(res)
   };
 
   return (

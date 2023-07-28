@@ -14,7 +14,7 @@ function Nav() {
                 </div>
 
                 <div className="link-container">
-                    <Link to="/">Surveillance</Link>
+                    <Link to="/stream">Surveillance</Link>
                 </div>
                 
                 <div className="link-container">

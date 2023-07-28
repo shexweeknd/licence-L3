@@ -94,7 +94,7 @@ export default function Register() {
           ></img>
         </div>
 
-        <a href="auth">Se Connecter</a>
+        <a href="auth">Se connecter</a>
 
         <span style={{ opacity: 1 }}>erreur</span>
 

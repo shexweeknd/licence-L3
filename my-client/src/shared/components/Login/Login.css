@@ -42,18 +42,18 @@ label {
     width: 120px;
     height: 50px;
     border: 2px solid gray;
-    background-color: #282c34;
+    background-color: #adaaaa;
     appearance: none;
     border-radius: 25px;
     transition: background-color 0.4s
 }
 
 .login-form .submit-button:hover {
-    background-color: #adaaaa;
+    background-color: #282c34;
 }
 
 .login-form .submit-button:disabled {
-    background-color: #adaaaa;
+    background-color: #282c34;
 }
 
 .login-form a {

@@ -11,7 +11,7 @@ label {
 
 .titre {
     text-align: center;
-    color: black;
+    color: rgba(255, 255, 255);
     position: absolute;
     top: 10%;
     font-size: 1.3em;
@@ -42,17 +42,18 @@ label {
     width: 120px;
     height: 50px;
     border: 2px solid gray;
-    background-color: #282c34;
+    background-color: #adaaaa;
     appearance: none;
+    border-radius: 25px;
     transition: background-color 0.4s
 }
 
 .register-form .submit-button:hover {
-    background-color: #adaaaa;
+    background-color: #282c34;
 }
 
 .register-form .submit-button:disabled {
-    background-color: #adaaaa;
+    background-color: #282c34;
 }
 
 .register-form a {
