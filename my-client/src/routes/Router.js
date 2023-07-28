@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { Navigate, createBrowserRouter } from 'react-router-dom';
 import Nav from '../shared/components/Nav/Nav';
 
 import Logs from '../screens/Logs/Logs';
@@ -9,6 +9,15 @@ import RegisterScreen from '../screens/RegisterScreen/RegisterScreen.js';
 import { SurveillanceContextProvider, LogsContextProvider } from '../contexts/Context';
 
 const router = createBrowserRouter([
+    {
+        path: "/",
+        element: (
+            <>
+                {/* ajoute une logique avec les cookies pour faire du protect route et du rendu conditionnel */}
+                <Navigate to='/auth' replace={true}/>
+            </>
+            )
+    },
     {
         path: "/auth",
         element: (

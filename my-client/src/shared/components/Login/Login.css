@@ -11,7 +11,7 @@ label {
 
 .titre {
     text-align: center;
-    color: black;
+    color: rgb(255, 255, 255);
     position: absolute;
     top: 10%;
     font-size: 1.3em;
@@ -20,7 +20,8 @@ label {
 .login-form input {
     font-size: x-large;
     margin-bottom: 0.8em;
-    border: 2px solid gray
+    border: 2px solid gray;
+    border-radius: 4px;
 }
 
 .login-form a {
@@ -43,6 +44,7 @@ label {
     border: 2px solid gray;
     background-color: #282c34;
     appearance: none;
+    border-radius: 25px;
     transition: background-color 0.4s
 }
 
@@ -61,6 +63,18 @@ label {
 
 .login-form a:hover {
     color: red;
+}
+
+.login-form .password-container {
+    position: relative;
+    justify-content: center;
+}
+
+.login-form .password-container .revealer{
+    position: absolute;
+    fill: "true";
+    right: 5px;
+    top: 5px;
 }
 
 .login-form span {

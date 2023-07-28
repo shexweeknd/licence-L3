@@ -1,0 +1,1 @@
+export const passwordTextHint = "mot de passe entre 8 et 16 caractères"

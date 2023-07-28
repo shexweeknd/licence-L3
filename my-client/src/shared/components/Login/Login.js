@@ -1,49 +1,84 @@
-import React, { useEffect, useState } from 'react';
-import { validateLoginForm } from '../../utils/authValidator';
+import React, { useEffect, useState, useRef } from "react";
+import { validateLoginForm } from "../../utils/authValidator";
+import { authUser } from "../../../services/api";
+import "./Login.css";
+import EyePasswordHidden from "../../assets/icons/eye-password-hide.svg";
+import EyePasswordShow from "../../assets/icons/eye-password-show.svg";
 
-import './Login.css'
+import { passwordTextHint } from '../../assets/texts/login'
 
 export default function Login() {
-
   const [mail, setMail] = useState(" ");
   const [password, setPassword] = useState(" ");
+  const [shown, setShown] = useState(false);
+
   const [isFormValid, setIsFormValid] = useState(false);
 
-  useEffect(()=>{
-    setIsFormValid(validateLoginForm({ mail, password}))
-  }, [mail, password, setIsFormValid])
+  const span = useRef();
+
+  useEffect(() => {
+    setIsFormValid(validateLoginForm({ mail, password }));
+  }, [mail, password, setIsFormValid]);
 
   const handleMail = (e) => {
-    setMail(e.target.value)
-  }
+    setMail(e.target.value);
+  };
   const handlePassword = (e) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
 
   const handleOnSubmit = (e) => {
-    e.preventDefault()
-    console.log(mail)
-    console.log(password)
-  }
+    e.preventDefault();
+
+    const userData = {
+      mail,
+      password,
+    };
+    console.log(userData);
+  };
 
   return (
     <>
-        <label className="titre" type="title"> Connexion </label>
-        <form className='login-form' onSubmit={handleOnSubmit}>
-            <label htmlFor='mail'>Identifiant:</label>
-            <input id='mail' type='input' onChange={handleMail} placeholder='exemple@mail.com'/>
+      <label className="titre" type="title">
+        {" "}
+        Connexion{" "}
+      </label>
+      <form className="login-form" onSubmit={handleOnSubmit}>
+        <label htmlFor="mail">Identifiant:</label>
+        <input
+          id="mail"
+          type="input"
+          onChange={handleMail}
+          placeholder="exemple@mail.com"
+        />
 
-            <label htmlFor='password'>Mot de passe:</label>
-            <input id='password' type='input' onChange={handlePassword} placeholder='********'/>
+        <label htmlFor="password">Mot de passe:</label>
+        <div className="password-container">
+          <input
+            id="password"
+            type={shown ? "text" : "password"}
+            onChange={handlePassword}
+            placeholder="********"
+          />
+          <img
+            src={shown ? EyePasswordShow : EyePasswordHidden}
+            className="revealer"
+            onClick={() => setShown(!shown)}
+          ></img>
+        </div>
 
-            <a href='Register'>S'inscrire</a>
+        <a href="Register">S'inscrire</a>
 
-            <span style={{opacity: 1}}>erreur</span>
+        <span style={{ opacity: 1 }} ref={span}></span>
 
-            <div className='submit-container'>
-                <input className="submit-button" disabled={!isFormValid} type='submit'/>
-            </div>
-        </form>
+        <div className="submit-container">
+          <input
+            className="submit-button"
+            disabled={!isFormValid}
+            type="submit"
+          />
+        </div>
+      </form>
     </>
-  )
+  );
 }

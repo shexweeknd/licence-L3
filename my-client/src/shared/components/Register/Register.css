@@ -20,7 +20,8 @@ label {
 .register-form input {
     font-size: x-large;
     margin-bottom: 0.8em;
-    border: 2px solid gray
+    border: 2px solid gray;
+    border-radius: 4px;
 }
 
 .register-form a {
@@ -61,6 +62,18 @@ label {
 
 .register-form a:hover {
     color: red;
+}
+
+.register-form .password-container {
+    position: relative;
+    justify-content: center;
+}
+
+.register-form .password-container .revealer{
+    position: absolute;
+    fill: "true";
+    right: 5px;
+    top: 5px;
 }
 
 .register-form span {
