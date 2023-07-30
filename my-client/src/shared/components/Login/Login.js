@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { validateLoginForm } from "../../utils/authValidator";
 import { authUser } from "../../../services/api";
+import { useSelector, useDispatch } from "react-redux";
 
 import "./Login.css";
 import EyePasswordHidden from "../../assets/icons/eye-password-hide.svg";
@@ -14,6 +15,9 @@ export default function Login({setIsLogin}) {
   const [shown, setShown] = useState(false);
 
   const [isFormValid, setIsFormValid] = useState(false);
+
+  const authSlice = useSelector(state => state.authSlice)
+  const dispatch = useDispatch()
 
   const span = useRef();
 
@@ -35,10 +39,25 @@ export default function Login({setIsLogin}) {
       email: mail,
       password: password,
     };
-    let res = authUser(userData)
+    
+    authUser(userData).then(
+      res => {
+        console.log(res)
+        if(res.error) {
+          //affichage d'une erreur sur l'ecran
+        } else {
+        localStorage.setItem("userData", JSON.stringify({...res.userDetails}));
 
-    console.log(res)
-  };
+        dispatch({
+          type: "authSlice/setUserCreds",
+          payload: res,
+        });
+        }
+      })
+
+  
+    }
+    
 
   return (
     <>

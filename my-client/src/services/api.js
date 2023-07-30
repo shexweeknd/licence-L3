@@ -18,7 +18,7 @@ export const fetchData = async (apiLink) => {
 
 export const createUser = async (userData) => {
   try {
-    const response = await API.post('/register', userData);
+    const response = await API.post('/api/register', {...userData});
     return response.data;
   } catch (error) {
     console.error('Une erreur s\'est produite lors de la création de l\'utilisateur :', error);
@@ -28,7 +28,8 @@ export const createUser = async (userData) => {
 
 export const authUser = async (userData) => {
   try {
-    return await API.post('/api/login', {...userData});
+    const response = await API.post('/api/login', {...userData})
+    return response.data;
   } catch (error) {
     console.error('Une erreur s\'est produite lors de la création de l\'utilisateur :', error);
     throw error;

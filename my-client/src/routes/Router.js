@@ -4,7 +4,6 @@ import Nav from '../shared/components/Nav/Nav';
 import Logs from '../screens/Logs/Logs';
 import Surveillance from '../screens/Surveillance/Surveillance';
 import Auth from '../screens/Auth/Auth.js';
-import RegisterScreen from '../screens/RegisterScreen/RegisterScreen.js';
 
 import { SurveillanceContextProvider, LogsContextProvider } from '../contexts/Context';
 
@@ -23,14 +22,6 @@ const router = createBrowserRouter([
         element: (
             <>
                 <Auth/>
-            </>
-            )
-    },
-    {
-        path: "/register",
-        element: (
-            <>
-                <RegisterScreen/>
             </>
             )
     },

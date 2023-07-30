@@ -3,9 +3,9 @@ import EyePasswordHidden from "../../assets/icons/eye-password-hide.svg";
 import EyePasswordShow from "../../assets/icons/eye-password-show.svg";
 
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { validateRegisterForm } from '../../utils/registerValidator';
+import { createUser } from "../../../services/api";
 
 export default function Register({setIsLogin}) {
 
@@ -35,10 +35,23 @@ export default function Register({setIsLogin}) {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    console.log(username)
-    console.log(mail)
-    console.log(password1)
-    console.log(password2)
+
+    const userData = {
+      username: username,
+      email: mail,
+      password: password1,
+    };
+
+    createUser(userData).then(
+      res => {
+        console.log(res)
+        if(res.error) {
+          //affichage d'une erreur sur l'écran
+        } else {
+          //affichage du succès sur l'écran
+          setIsLogin()
+        }
+      })
   }
 
   return (

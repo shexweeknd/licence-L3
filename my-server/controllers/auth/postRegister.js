@@ -18,15 +18,15 @@ const postRegister = async (req, res) => {
 
         //creation de l'utilisateur dans la BDD
         const user = await User.create({
-            username,
             email: email.toLowerCase(),
+            username: username,
             password: hashedPassword
         })
 
         res.status(201).send("Compte créé avec succès !")
 
     } catch {
-        return res.status(500).send("Une erreur s'est produite. Veuillez Réessayer")
+        return res.status(500).send("Une erreur s'est produite. Veuillez Réessayer SVP !")
     }
 };
 
