@@ -9,7 +9,7 @@ import EyePasswordShow from "../../assets/icons/eye-password-show.svg";
 
 import { passwordTextHint } from '../../assets/texts/login';
 
-export default function Login({setIsLogin}) {
+export default function Login({setIsLogin, toggleAlert}) {
   const [mail, setMail] = useState(" ");
   const [password, setPassword] = useState(" ");
   const [shown, setShown] = useState(false);
@@ -44,7 +44,13 @@ export default function Login({setIsLogin}) {
       res => {
         console.log(res)
         if(res.error) {
-          //affichage d'une erreur sur l'ecran
+          
+          const payload = {
+            isError: true,
+            message: res.error.text
+          }
+
+          toggleAlert(payload)
         } else {
         localStorage.setItem("userData", JSON.stringify({...res.userDetails}));
 
@@ -54,8 +60,6 @@ export default function Login({setIsLogin}) {
         });
         }
       })
-
-  
     }
     
 

@@ -3,6 +3,7 @@
 # dependencies
 /my-client/node_modules
 /my-client/.pnp
+/my-client/src/shared/assets/animated/*.mp4
 /my-client/pnp.js
 
 /my-server/node_modules

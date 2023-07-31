@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { validateRegisterForm } from '../../utils/registerValidator';
 import { createUser } from "../../../services/api";
 
-export default function Register({setIsLogin}) {
+export default function Register({setIsLogin, toggleAlert}) {
 
   const [username, setUsername] = useState(" ");
   const [mail, setMail] = useState(" ");
@@ -46,9 +46,22 @@ export default function Register({setIsLogin}) {
       res => {
         console.log(res)
         if(res.error) {
-          //affichage d'une erreur sur l'écran
+
+          const payload = {
+            isError: true,
+            message: res.error.text
+          }
+
+        toggleAlert(payload)
         } else {
-          //affichage du succès sur l'écran
+
+          const payload = {
+            isError: false,
+            message: res.message
+          }
+
+          toggleAlert(payload)
+
           setIsLogin()
         }
       })

@@ -1,0 +1,49 @@
+.alert-container {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    translate: -50;
+    bottom: 30px;
+    max-height: 45px;
+    border: solid 4px #059b0c;
+    background-color: #ffffff;
+    color: #22fc05;
+    font-size: 0.75em;
+    padding: 7px;
+    border-radius: 5px;
+    transition: opacity 1s;
+    animation-name: toShow;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out
+}
+
+.alert-container.error{
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    translate: -50;
+    bottom: 30px;
+    max-height: 45px;
+    border: solid 4px #9b0505;
+    background-color: #ffffff;
+    color: #fc0505;
+    font-size: 0.75em;
+    padding: 7px;
+    border-radius: 5px;
+    transition: opacity 1s;
+    animation-name: toShow;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out
+}
+
+@keyframes toShow {
+    from {
+        opacity: 0;
+        bottom: 0px;
+    }
+
+    to {
+        opacity: 1;     
+        bottom: 30px;
+    }
+}
