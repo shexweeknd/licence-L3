@@ -1,12 +1,11 @@
 const express = require("express");
 const http = require("http")
 const cors = require("cors"); //pour permettre d'echanger des iformations entre les domaines 'PORTS' du même origine
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
 require("dotenv").config();
 
 const router = require("./routes/authRoutes");
-// import database from './config/database';
 
 const app = express();
 const port = process.env.PORT || process.env.DEV_PORT;
@@ -31,15 +30,21 @@ app.use((err, req, res, next) => {
 
 const server = http.createServer(app);
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(
-    // Démarrage du serveur
-    server.listen(port, () => {
-      console.log(`Serveur démarré sur le port ${port}`);
-    })
-  )
-  .catch((err) => {
-    console.log("Failed to connect to mongo");
-    console.log(err);
-  });
+// mongoose
+//   .connect(process.env.MONGO_URI)
+//   .then(
+//     // Démarrage du serveur
+//     server.listen(port, () => {
+//       console.log(`Serveur démarré sur le port ${port}`);
+//     })
+//   )
+//   .catch((err) => {
+//     console.log("Failed to connect to mongo");
+//     console.log(err);
+//   });
+
+
+// Démarrage du serveur
+server.listen(port, () => {
+  console.log(`Serveur démarré sur le port ${port}`);
+  })

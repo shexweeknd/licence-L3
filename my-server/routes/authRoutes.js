@@ -30,6 +30,7 @@ router.post(
   "/login",
   validator.body(LoginSchema),
   authControllers.controllers.postLogin
+
 );
 
 //protected route test 

@@ -1,33 +1,33 @@
-const User = require("../../models/user.js");
+// const User = require("../../models/user.js");
+const { response } = require("express");
+const { addUser } = require("../../models/userSqlite.js");
+const { getUser } = require("../../models/userSqlite.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const postRegister = async (req, res) => {
-    try {
-        const { username, email, password } = req.body;
+    const { username, email, password } = await req.body;
 
-        //check if user exists
-        const userExists = await User.exists({ email: email.toLowerCase() });
-
-        if (userExists) {
+    //check if user exists
+    await getUser({ email: email.toLowerCase() }).then(async (response) => {
+        if(!!response) {
             return res.status(409).send("Email déjà utilisé.")
+        } else {
+            //hash du mot de passe
+            const hashedPassword = await bcrypt.hash(password, 10)
+
+            //creation de l'utilisateur dans la BDD
+            await addUser({
+                email: email.toLowerCase(),
+                username: username,
+                password: hashedPassword
+            })
+            return res.status(201).send("Compte créé avec succès !")
         }
-
-        //hash du mot de passe
-        const hashedPassword = await bcrypt.hash(password, 10)
-
-        //creation de l'utilisateur dans la BDD
-        const user = await User.create({
-            email: email.toLowerCase(),
-            username: username,
-            password: hashedPassword
-        })
-
-        res.status(201).send("Compte créé avec succès !")
-
-    } catch {
-        return res.status(500).send("Une erreur s'est produite. Veuillez Réessayer !")
-    }
+        
+    }).catch(err => {
+        return res.status(500).send('Une erreur s\'est produite. Veuiller Réessayer !')
+    })
 };
 
 module.exports = postRegister
