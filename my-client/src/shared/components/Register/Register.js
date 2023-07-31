@@ -44,12 +44,14 @@ export default function Register({setIsLogin, toggleAlert}) {
 
     createUser(userData).then(
       res => {
+        console.log(res)
         const payload = {
           isError: false,
-          message: res.response.data
+          message: res
         }
 
         toggleAlert(payload)
+        setIsLogin(true)
         
       }).catch (err => {
           const payload = {
@@ -114,7 +116,7 @@ export default function Register({setIsLogin, toggleAlert}) {
           ></img>
         </div>
 
-        <a onClick={setIsLogin}>Se connecter</a>
+        <a onClick={() => {setIsLogin(true)}}>Se connecter</a>
 
         <span style={{ opacity: 1 }}>erreur</span>
 

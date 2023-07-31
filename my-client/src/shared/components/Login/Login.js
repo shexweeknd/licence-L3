@@ -70,7 +70,7 @@ export default function Login({setIsLogin, toggleAlert}) {
         Connexion{" "}
       </label>
       <form className="login-form" onSubmit={handleOnSubmit}>
-        <label htmlFor="mail">Identifiant:</label>
+        <label htmlFor="mail">Adresse email:</label>
         <input
           id="mail"
           type="input"
