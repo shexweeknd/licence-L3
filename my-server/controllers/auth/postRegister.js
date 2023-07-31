@@ -26,7 +26,7 @@ const postRegister = async (req, res) => {
         res.status(201).send("Compte créé avec succès !")
 
     } catch {
-        return res.status(500).send("Une erreur s'est produite. Veuillez Réessayer SVP !")
+        return res.status(500).send("Une erreur s'est produite. Veuillez Réessayer !")
     }
 };
 

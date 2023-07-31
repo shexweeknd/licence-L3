@@ -13,9 +13,15 @@ export default function Auth() {
     message: ''
   })
 
-  const toggleAlert = ({payload}) => {
-    setPayload({...payload})
-    setIsAlert(!isAlert);
+  const toggleAlert = async (payload) => {
+    if (payload) {
+      setPayload(payload);
+      setIsAlert(!isAlert);
+      
+      setTimeout(()=> {
+        setIsAlert(!isAlert);
+      }, 2000)
+    }
   };
 
   const toggleLogin = () => {
@@ -34,7 +40,7 @@ export default function Auth() {
           <Register setIsLogin={setIsLogin} toggleAlert={toggleAlert}/>
         )}
       </div>
-      {isAlert ? <Alert payload={{ ...payload }} toggleAlert={toggleAlert}/> : <></>}
+      {isAlert ? <Alert payload={{ ...payload }} setIsAlert={setIsAlert}/> : <></>}
     </>
   );
 }

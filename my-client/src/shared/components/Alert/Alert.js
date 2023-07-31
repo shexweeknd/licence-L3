@@ -3,14 +3,13 @@ import "./Alert.css";
 import Succeed from '../../assets/icons/succeed.png';
 import Warning from '../../assets/icons/warning.png';
 
-export default function ({toggleAlert, payload}) {
+export default function ({setIsAlert, payload}) {
 
     useEffect(()=>{
         setTimeout(()=>{
             const box = document.getElementById('alert-container')
             box.style.display = 'none'
         }, 2000);
-        toggleAlert()
     }, [])
 
   return (

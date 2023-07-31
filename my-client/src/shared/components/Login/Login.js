@@ -43,15 +43,7 @@ export default function Login({setIsLogin, toggleAlert}) {
     authUser(userData).then(
       res => {
         console.log(res)
-        if(res.error) {
-          
-          const payload = {
-            isError: true,
-            message: res.error.text
-          }
-
-          toggleAlert(payload)
-        } else {
+        
         localStorage.setItem("userData", JSON.stringify({...res.userDetails}));
 
         dispatch({
@@ -59,7 +51,15 @@ export default function Login({setIsLogin, toggleAlert}) {
           payload: res,
         });
         }
-      })
+      ).catch(err => {
+
+        const payload = {
+          isError: true,
+          message: err.response.data
+        }
+
+        toggleAlert(payload)
+        })
     }
     
 

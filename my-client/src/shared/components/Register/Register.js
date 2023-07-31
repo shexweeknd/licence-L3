@@ -44,28 +44,22 @@ export default function Register({setIsLogin, toggleAlert}) {
 
     createUser(userData).then(
       res => {
-        console.log(res)
-        if(res.error) {
-
-          const payload = {
-            isError: true,
-            message: res.error.text
-          }
+        const payload = {
+          isError: false,
+          message: res.response.data
+        }
 
         toggleAlert(payload)
-        } else {
-
+        
+      }).catch (err => {
           const payload = {
-            isError: false,
-            message: res.message
+            isError: true,
+            message: err.response.data
           }
-
+  
           toggleAlert(payload)
-
-          setIsLogin()
-        }
-      })
-  }
+          })
+      }
 
   return (
     <>
