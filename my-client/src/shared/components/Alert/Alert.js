@@ -8,8 +8,6 @@ export default function ({setIsAlert, payload}) {
     useEffect(()=>{
         setTimeout(async  () => {
             const box = document.getElementById('alert-container')
-            box.style.opacity = 0
-            box.style.display = 'none'
             await setIsAlert(false)
         }, 2000);
     }, [])

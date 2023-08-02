@@ -1,7 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
+
+import LoadingPage from "../LoadingPage/LoadingPage";
+
 import { validateLoginForm } from "../../utils/authValidator";
 import { authUser } from "../../../services/api";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import "./Login.css";
 import EyePasswordHidden from "../../assets/icons/eye-password-hide.svg";
@@ -9,17 +13,17 @@ import EyePasswordShow from "../../assets/icons/eye-password-show.svg";
 
 import { passwordTextHint } from '../../assets/texts/login';
 
-export default function Login({setIsLogin, toggleAlert}) {
+export default function Login({setIsLogin, toggleAlert, isLoadingPage, setIsLoadingPage}) {
+  const navigate = useNavigate();
+
   const [mail, setMail] = useState(" ");
   const [password, setPassword] = useState(" ");
   const [shown, setShown] = useState(false);
 
   const [isFormValid, setIsFormValid] = useState(false);
 
-  const authSlice = useSelector(state => state.authSlice)
+  const userSlice = useSelector(state => state.userReducer)
   const dispatch = useDispatch()
-
-  const span = useRef();
 
   useEffect(() => {
     setIsFormValid(validateLoginForm({ mail, password }));
@@ -35,6 +39,8 @@ export default function Login({setIsLogin, toggleAlert}) {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
 
+    setIsLoadingPage(true)
+
     const userData = {
       email: mail,
       password: password,
@@ -42,15 +48,17 @@ export default function Login({setIsLogin, toggleAlert}) {
     
     authUser(userData).then(
       res => {
-        console.log(res)
         
         localStorage.setItem("userData", JSON.stringify({...res.userDetails}));
 
         dispatch({
-          type: "authSlice/setUserCreds",
-          payload: res,
+          type: "userSlice/setUserCreds",
+          payload: res.userDetails,
         });
+
+        navigate('/stream');
         }
+
       ).catch(err => {
 
         const payload = {
@@ -59,7 +67,10 @@ export default function Login({setIsLogin, toggleAlert}) {
         }
 
         toggleAlert(payload)
-        })
+        });
+      
+      setIsLoadingPage(false)
+      
     }
     
 
@@ -69,7 +80,8 @@ export default function Login({setIsLogin, toggleAlert}) {
         {" "}
         Connexion{" "}
       </label>
-      <form className="login-form" onSubmit={handleOnSubmit}>
+
+      <form className="login-form" disabled={isLoadingPage} onSubmit={handleOnSubmit}>
         <label htmlFor="mail">Adresse email:</label>
         <input
           id="mail"
@@ -94,8 +106,6 @@ export default function Login({setIsLogin, toggleAlert}) {
         </div>
 
         <a onClick={setIsLogin}>S'inscrire</a>
-
-        <span style={{ opacity: 1 }} ref={span}></span>
 
         <div className="submit-container">
           <input

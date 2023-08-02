@@ -1,9 +1,23 @@
 // ce dossier contient les fonctions de requetes vers les API 
 import axios from 'axios';
+import { logout } from '../shared/utils/authFunctions.js'
 
 const API = axios.create({
   baseURL: 'http://localhost:4000', // Remplace cette URL par l'URL réelle de ton API
   timout: 1000
+});
+
+//creation de l'intercepteur
+API.interceptors.request.use((config) => {
+  const userDetails = localStorage.getItem("user");
+  if (userDetails) {
+    const token = JSON.parse(userDetails).token;
+    config.headers.Authorization = `Bearer ${token}`
+  }
+
+  return config;
+}, (err) => {
+  return Promise.reject(err);
 });
 
 export const fetchData = async (apiLink) => {
@@ -35,7 +49,6 @@ export const authUser = async (userData) => {
     throw error;
   }
 
-  // const res = await axios.post('http://localhost:4000/api/login', { email: 'guest@gmail.com', password: "guest123"} )
 };
 
 export const registerUser = async (userData) => {
@@ -47,6 +60,16 @@ export const registerUser = async (userData) => {
   }
 };
 
-// Ajoute d'autres fonctions d'appel à l'API selon tes besoins
+// Routes API protégés
+
+//fonction de gestion des erreurs
+const checkResponseStatus = (exception) => {
+  const responseStatus = exception?.response?.status;
+
+  // action lors de l'echec d'execution des middlewares serveurs
+  if (responseStatus) {
+    (responseStatus === 401  || responseStatus === 403) && logout(); //middleware auth
+  }
+}
 
 export default API;

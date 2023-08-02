@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { validateRegisterForm } from '../../utils/registerValidator';
 import { createUser } from "../../../services/api";
 
-export default function Register({setIsLogin, toggleAlert}) {
+export default function Register({setIsLogin, toggleAlert, isLoadingPage, setIsLoadingPage}) {
 
   const [username, setUsername] = useState(" ");
   const [mail, setMail] = useState(" ");
@@ -33,8 +33,10 @@ export default function Register({setIsLogin, toggleAlert}) {
     setPassword2(e.target.value)
   }
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault()
+
+    setIsLoadingPage(true);
 
     const userData = {
       username: username,
@@ -42,7 +44,7 @@ export default function Register({setIsLogin, toggleAlert}) {
       password: password1,
     };
 
-    createUser(userData).then(
+    await createUser(userData).then(
       res => {
         console.log(res)
         const payload = {
@@ -61,7 +63,9 @@ export default function Register({setIsLogin, toggleAlert}) {
   
           toggleAlert(payload)
           })
-      }
+
+    setIsLoadingPage(false);
+  }
 
   return (
     <>
@@ -69,7 +73,7 @@ export default function Register({setIsLogin, toggleAlert}) {
         {" "}
         S'inscrire{" "}
       </label>
-      <form className="register-form" onSubmit={handleOnSubmit}>
+      <form className="register-form" disabled={isLoadingPage} onSubmit={handleOnSubmit}>
         <label htmlFor="username">Nom d'utilisateur:</label>
         <input
           id="username"

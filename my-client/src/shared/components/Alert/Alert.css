@@ -15,7 +15,7 @@
     animation-name: toShow;
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
-    transition: opacity 1s, display 1s
+    transition: opacity 1s
 }
 
 .alert-container.error{
@@ -35,7 +35,7 @@
     animation-name: toShow;
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
-    transition: opacity 1s, display 1s
+    transition: opacity 1s
 }
 
 @keyframes toShow {

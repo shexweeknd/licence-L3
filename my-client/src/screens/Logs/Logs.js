@@ -1,4 +1,5 @@
 import "./Logs.css";
+import React, { useState } from "react";
 
 import LogsVideoContainer from "../../shared/components/LogsVideoContainer/LogsVideoContainer";
 import LogsTreeContainer from "../../shared/components/LogsTreeContainer/LogsTreeContainer";
