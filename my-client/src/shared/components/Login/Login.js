@@ -37,15 +37,16 @@ export default function Login({setIsLogin, toggleAlert, isLoadingPage, setIsLoad
   };
 
   const handleOnSubmit = async (e) => {
-    e.preventDefault();
 
     setIsLoadingPage(true)
+    
+    e.preventDefault();
 
     const userData = {
       email: mail,
       password: password,
     };
-    
+
     authUser(userData).then(
       res => {
         

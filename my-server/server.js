@@ -1,5 +1,6 @@
 const express = require("express");
-const http = require("http")
+const http = require("http");
+const socketServer = require("./socketServer.js")
 const cors = require("cors"); //pour permettre d'echanger des iformations entre les domaines 'PORTS' du même origine
 // const mongoose = require("mongoose");
 
@@ -29,6 +30,7 @@ app.use((err, req, res, next) => {
 });
 
 const server = http.createServer(app);
+socketServer.registerSocketServer(server);
 
 // mongoose
 //   .connect(process.env.MONGO_URI)

@@ -1,3 +1,4 @@
+// a modifier car format de l'obj retourné par encore en forme exacte
 const fs = require('fs');
 const path = require('path');
 
@@ -25,6 +26,8 @@ const getFilesList = (dirPath) => {
 };
 
 const directoryPath = '../my-client/src/';
-const filesList = getFilesList(directoryPath);
+const listFolder = getFilesList(directoryPath);
 
 console.log(filesList);
+
+module.exports = listFolder;
