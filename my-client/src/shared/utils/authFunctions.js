@@ -11,6 +11,6 @@ export const verifyToken = async () => {
     if (!UserDetails) {
         logout();
     } else {
-        connectToSocketServer(UserDetails);
+        connectToSocketServer(JSON.parse(UserDetails));
     }
 }

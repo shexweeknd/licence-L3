@@ -6,6 +6,8 @@ const config = process.env;
 const verifyToken = (req, res, next) => {
     let token = req.body.token || req.query.token || req.headers['authorization']
 
+    console.log("the token is : " + token)
+
     if (!token) {
         return res.status(403).send("Un jeton est nécessaire pour cette connexion.")
     }

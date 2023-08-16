@@ -4,8 +4,16 @@ import LogoIcon from '../../assets/animated/eye.gif';
 import LogoutIcon from '../../assets/icons/logout.png';
 
 import {Link} from 'react-router-dom';
+import { useEffect } from 'react';
+import { verifyToken } from '../../utils/authFunctions.js';
+import { logout } from '../../utils/authFunctions.js';
 
 function Nav() {
+
+    useEffect(async () => {
+        await verifyToken()
+    }, [])
+
     return (
         <>
             <nav>
@@ -21,7 +29,7 @@ function Nav() {
                     <Link to="/logs">Serveur Log</Link>
                 </div>
                 
-                <div className='disconnect-icon container'>
+                <div onClick={() => logout() } className='disconnect-icon container'>
                     <img className='disconnect-icon' src={LogoutIcon}/>
                 </div>
 
