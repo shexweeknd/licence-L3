@@ -32,7 +32,7 @@ export const fetchData = async (apiLink) => {
 
 export const createUser = async (userData) => {
   try {
-    const response = await API.post('/api/register', {...userData});
+    const response = await API.post('/api/auth/register', {...userData});
     return response.data;
   } catch (error) {
     console.error('Une erreur s\'est produite lors de la création de l\'utilisateur :', error);
@@ -42,10 +42,10 @@ export const createUser = async (userData) => {
 
 export const authUser = async (userData) => {
   try {
-    const response = await API.post('/api/login', {...userData})
+    const response = await API.post('/api/auth/login', {...userData})
     return response.data;
   } catch (error) {
-    console.error('Une erreur s\'est produite lors de la création de l\'utilisateur :', error);
+    console.error('Une erreur s\'est produite lors de la connexion de l\'utilisateur :', error);
     throw error;
   }
 
@@ -53,7 +53,7 @@ export const authUser = async (userData) => {
 
 export const registerUser = async (userData) => {
   try {
-    return await API.post('/api/register', {...userData});
+    return await API.post('/api/auth/register', {...userData});
   } catch (error) {
     console.error('Une erreur s\'est produite lors de la création de l\'utilisateur :', error);
     throw error;
@@ -61,6 +61,15 @@ export const registerUser = async (userData) => {
 };
 
 // Routes API protégés
+export const queryCamsList = async (data) => {
+  try {
+    return await API.get('/api/cams/getcams', {data});
+  } catch (error) {
+    console.log('Impossible d\'obtenir la liste des caméras actifs : ', error);
+    checkResponseStatus(error)
+    throw error;
+  }
+}
 
 //fonction de gestion des erreurs
 const checkResponseStatus = (exception) => {

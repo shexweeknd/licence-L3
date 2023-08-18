@@ -10,6 +10,7 @@
 .item {
   flex: 0 0 48%; /* Changer le pourcentage en fonction de vos besoins */
   cursor: pointer;
+  position: relative;
   padding: 1px;
   box-sizing: border-box;
   border: 1px solid #000000;
@@ -20,6 +21,7 @@
 }
 .item video {
   width: 100%;
+  position: relative;
   height: auto;
 }
 

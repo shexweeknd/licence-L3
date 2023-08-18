@@ -6,7 +6,8 @@ const cors = require("cors"); //pour permettre d'echanger des iformations entre 
 
 require("dotenv").config();
 
-const router = require("./routes/authRoutes");
+const authRoutes = require("./routes/authRoutes");
+const camsRoutes = require("./routes/camsRoutes");
 
 const app = express();
 const port = process.env.PORT || process.env.DEV_PORT;
@@ -21,7 +22,8 @@ app.use(cors());
 app.use(express.json());
 
 // On envoie une requete à un point de terminaison BASEURL + /api + route
-app.use("/api", router);
+app.use("/api/auth", authRoutes);
+app.use("/api/cams", camsRoutes);
 
 // Gestion des erreurs
 app.use((err, req, res, next) => {

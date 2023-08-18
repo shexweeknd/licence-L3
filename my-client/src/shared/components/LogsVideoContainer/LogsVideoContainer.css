@@ -1,11 +1,14 @@
 .logs-video-container {
     display: flex;
+    padding: 10px 10px 10px 10px;
     position: relative;
     flex-direction: column;
     width: 100%;
+    align-items: center;
 }
 
 .logs-video-container video {
+    position: relative;
     margin: 10px;
     box-sizing: border-box;
     border: 1px solid #000000;
@@ -18,6 +21,7 @@
     margin: 10px;
     background: #333333;
     border-radius: 0.5%;
+    width: 100%;
 }
 .logs-video-container .info div {
     width: 50%;

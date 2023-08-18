@@ -1,5 +1,20 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 import { fetchData } from "../services/api.js";
+
+const NavContext = createContext({
+  listed: true,
+  setListed: () => {},
+})
+
+export const NavContextProvider = ({ children }) => {
+  const [listed, setListed] = useState(true);
+
+  return (
+    <NavContext.Provider value={{ listed, setListed }}>
+      {children}
+    </NavContext.Provider>
+  )
+}
 
 const SurveillanceContext = createContext({
   data: [],
@@ -15,7 +30,7 @@ export const SurveillanceContextProvider = ({ children }) => {
   useEffect(() => {
     async function fetchQuery() {
       try {
-        const arrayData = await fetchData('/api/rooms');
+        const arrayData = await fetchData('/api/cams/getcams');
         setData(arrayData)
         setCurrentSalle(arrayData[0].salle)
         // Effectuer le traitement des données ici
@@ -97,4 +112,4 @@ export const LogsTreeContextProvider = ({ children }) => {
 
 
 
-export { SurveillanceContext, LogsContext };
+export { SurveillanceContext, LogsContext, NavContext };

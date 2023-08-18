@@ -5,7 +5,7 @@ import Logs from '../screens/Logs/Logs';
 import Surveillance from '../screens/Surveillance/Surveillance';
 import Auth from '../screens/Auth/Auth.js';
 
-import { SurveillanceContextProvider, LogsContextProvider } from '../contexts/Context';
+import { SurveillanceContextProvider, LogsContextProvider, NavContextProvider } from '../contexts/Context';
 
 const router = createBrowserRouter([
     {
@@ -29,7 +29,9 @@ const router = createBrowserRouter([
         path: "/stream",
         element: (
             <>
-                <Nav/>
+                <NavContextProvider>
+                    <Nav/>
+                </NavContextProvider>
                 <SurveillanceContextProvider>
                     <Surveillance/>
                 </SurveillanceContextProvider>
@@ -40,7 +42,9 @@ const router = createBrowserRouter([
         path: "logs",
         element: (
             <>
-                <Nav/>
+                <NavContextProvider>
+                    <Nav/>
+                </NavContextProvider>
                 <LogsContextProvider>
                     <Logs/> 
                 </LogsContextProvider>

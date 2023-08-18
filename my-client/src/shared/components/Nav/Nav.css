@@ -73,7 +73,7 @@ body {
 .logo-icon.container {
     position: absolute;
     justify-content: center;
-    width: fit-content
+    width: 40px;
 }
 
 .logo-icon {

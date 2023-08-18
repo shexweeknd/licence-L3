@@ -1,16 +1,19 @@
 import './IpContainer.css'
-import { SurveillanceContext } from '../../../contexts/Context.js'
-import React, { useContext } from 'react'
+import { SurveillanceContext, NavContext } from '../../../contexts/Context.js'
+import React, { useContext, useEffect } from 'react'
 
 function IpContainer() {
   const { data, currentSalle, setCurrentSalle } = useContext(SurveillanceContext);
+  const { listed, setListed } = useContext(NavContext);
 
   const handleClick = (salle) => {
     setCurrentSalle(salle);
   };
 
+  // a corriger car le useState ne marche pas pour le display
+
   return (
-    <div className="IP-container">
+    <div className="IP-container" style={listed ? {display: "inline-flex"} : {display: "none"}}>
       {data.map((raspberry) => (
         <div
           className="IP-object"
