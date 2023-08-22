@@ -4,6 +4,7 @@ import React, { useContext, useEffect } from 'react'
 
 function IpContainer() {
   const { data, currentSalle, setCurrentSalle } = useContext(SurveillanceContext);
+
   const { listed, setListed } = useContext(NavContext);
 
   const handleClick = (salle) => {

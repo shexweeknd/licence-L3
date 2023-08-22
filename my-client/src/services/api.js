@@ -25,7 +25,7 @@ export const fetchData = async (apiLink) => {
       const response = await API.get(`${apiLink}`);
       return response.data;
     } catch (error) {
-      console.error('Une erreur s\'est produite lors de la récupération des données utilisateur :', error);
+      console.error('Une erreur s\'est produite lors de la récupération des données API sur fetchData:', error);
       throw error;
     }
   };

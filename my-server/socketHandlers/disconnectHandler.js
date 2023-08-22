@@ -1,7 +1,7 @@
 const serverStore = require("../store/serverStore");
 
 const disconnectHandler = (socket) => {
-    serverStore.removeConnectedUser(socket.id)
+    serverStore.removeConnected(socket.id)
 }
 
 module.exports = disconnectHandler;

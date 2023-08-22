@@ -1,6 +1,7 @@
 const authSocket = require("./middleware/authSocket.js");
 const newConnectionHandler = require("./socketHandlers/newConnectionHandler.js");
 const disconnectHandler = require('./socketHandlers/disconnectHandler.js');
+const emitToEveryUsers = require("./socketHandlers/emitToEveryUsers.js")
 const serverStore = require("./store/serverStore.js")
 
 const registerSocketServer = (server) => {
@@ -22,10 +23,13 @@ const registerSocketServer = (server) => {
         console.log("user connected");
         console.log(socket.id);
 
-        //fonctions pour enregistrer les ids de la connection socket entrante
+        //fonctions pour enregistrer les ids de la connection socket des users entrants
         newConnectionHandler(socket, io);
+        
+        // emit to every users that those are connected cams
+        emitToEveryUsers('emit-camslist', socket, io)
 
-        //fonction appelé lors de la déconnexion d'un socket
+        //fonction appelé lors de la déconnexion d'un socket user/cams
         socket.on('disconnect', () => {
             disconnectHandler(socket);
         })

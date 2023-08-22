@@ -1,5 +1,7 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, { createContext, useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { fetchData } from "../services/api.js";
+import { current } from "@reduxjs/toolkit";
 
 const NavContext = createContext({
   listed: true,
@@ -27,20 +29,32 @@ export const SurveillanceContextProvider = ({ children }) => {
   const [ data, setData ] = useState([])
   const [ currentSalle, setCurrentSalle ] = useState('');
 
-  useEffect(() => {
-    async function fetchQuery() {
+  const arrayData = useSelector(state => state.camsReducer).connectedCams
+
+  console.log("arrayData reçu du contexte:" ,arrayData)
+
+  useEffect(async () => {
+    if (data.length === 0) {
+      //Appel API une seule fois
+      const temp = await fetchData("/api/cams/getcams");
+      setData(temp);
+      setCurrentSalle(temp[0].salle)
+      console.log("premier appel API", data)
+    }
+  },
+  []);
+
+  setInterval(() => {
+    if (data.length !== 0 && arrayData.length !== 0) {
       try {
-        const arrayData = await fetchData('/api/cams/getcams');
-        setData(arrayData)
-        setCurrentSalle(arrayData[0].salle)
-        // Effectuer le traitement des données ici
+        setData(arrayData);
       } catch (error) {
-        // Gérer l'erreur ici
+        console.log("erreur de gestion des camlist", error)
       }
     }
-    fetchQuery()
-  },
-  [])
+    
+  }, 5000)
+
 
   return (
     <SurveillanceContext.Provider value={{ data, currentSalle, setCurrentSalle }}>
@@ -60,7 +74,7 @@ export const LogsContextProvider = ({ children }) => {
   const [ metaData, setMetaData ] = useState([])
 
   useEffect(() => {
-    async function fetchQuery() {
+    async function setQuery() {
       try {
 
         const arrayMetaData = await fetchData('/api/logs/metadata/video');
@@ -70,7 +84,7 @@ export const LogsContextProvider = ({ children }) => {
         // Gérer l'erreur ici
       }
     }
-    fetchQuery()
+    setQuery()
   },
   [])
 
@@ -90,7 +104,7 @@ export const LogsTreeContextProvider = ({ children }) => {
   const [ treeData, setTreeData ] = useState([])
 
   useEffect(() => {
-    async function fetchQuery() {
+    async function setQuery() {
       try {
         const arrayTreeData = await fetchData('/api/logs/treedata');
         setTreeData(arrayTreeData)
@@ -99,7 +113,7 @@ export const LogsTreeContextProvider = ({ children }) => {
         // Gérer l'erreur ici
       }
     }
-    fetchQuery()
+    setQuery()
   },
   [])
 
