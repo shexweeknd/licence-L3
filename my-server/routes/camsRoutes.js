@@ -13,6 +13,7 @@ const postCamsListSchema = Joi.object({
   ip: Joi.string().regex(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/).required(),
   src: Joi.array().items(Joi.string()).required(),
   type: Joi.string().required(),
+  key: Joi.string().required()
 });
 
 //------------------------------------------------------------

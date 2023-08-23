@@ -2,7 +2,7 @@ import { store } from '../store/store.js';
 
 import io from 'socket.io-client';
 
-let  socket = null;
+let socket = null;
 
 export const connectToSocketServer = ( UserDetails ) => {
     const jwtToken = UserDetails.token

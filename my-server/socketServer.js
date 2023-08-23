@@ -15,12 +15,13 @@ const registerSocketServer = (server) => {
     // stocker le io objet dans le store
     serverStore.setSocketServerInstance(io)
 
+    //utilisation de middleware pour authentification avant de créer le socket
     io.use((socket, next) => {
         authSocket(socket, next);
     })
 
     io.on("connection", (socket) => {
-        console.log("user connected");
+        console.log("calling for connection");
         console.log(socket.id);
 
         //fonctions pour enregistrer les ids de la connection socket des users entrants
@@ -33,7 +34,8 @@ const registerSocketServer = (server) => {
         socket.on('disconnect', () => {
             disconnectHandler(socket);
         })
-    })
+    });
+
 }
 
 module.exports = {

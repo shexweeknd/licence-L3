@@ -18,8 +18,8 @@ const addNewConnectedUser = ({socketId, userId}) => {
     console.log("new connected users added: ", connectedUsers)
 }
 
-const addNewConnectedCams = ({socketId, camsId}) => {
-    connectedCams.set(socketId, {camsId});
+const addNewConnectedCams = ({socketId, camsDetails}) => {
+    connectedCams.set(socketId, camsDetails);
     console.log("new connected cams added: ", connectedCams)
 }
 
