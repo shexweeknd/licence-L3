@@ -14,7 +14,7 @@ const newConnectionHandler = async (socket, io) => {
             socketId: socket.id,
             camsDetails: userDetails
         })
-        return null
+        return null // à décommenter après les phases de test du cam-controller
     }
 
     serverStore.addNewConnectedUser({

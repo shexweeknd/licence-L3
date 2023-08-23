@@ -38,12 +38,8 @@ const app = async () => {
 
     socket.on("emit-camslist", async (data) => {
       console.log(data)
-      store.dispatch({
-          type: "camsSlice/setConnectedCams",
-          payload: data,
-        });
     });
-    
+
   }
 };
 

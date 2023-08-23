@@ -49,11 +49,22 @@ const getActiveUsersConnections = (userId) => {
     return activeConnections;
 }
 
+const getActiveCamsConnections = () => {
+    const activeCams = [];
+
+    connectedCams.forEach((value, key) => {
+        activeCams.push(value)
+    })
+
+    return  activeCams;
+}
+
 module.exports = {
     addNewConnectedUser,
     addNewConnectedCams,
     removeConnected,
     getActiveUsersConnections,
+    getActiveCamsConnections,
     setSocketServerInstance,
     getSocketServerInstance
 }
