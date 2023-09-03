@@ -2,6 +2,7 @@ import './VideoContainer.css';
 import { useTrail, animated } from 'react-spring'
 import { SurveillanceContext } from '../../../contexts/Context.js';
 import React, { useContext } from 'react';
+import NotFound from './NotFound.js';
 
 function VideoContainer() {
     const { data, currentSalle, setCurrentSalle } = useContext(SurveillanceContext)
@@ -20,10 +21,9 @@ function VideoContainer() {
             }
         })
 
-    //logique d'affichage
     return (
         <div className="videos-container">
-            {data.map((raspberry) => {
+            {data.length >> 0 ? data.map((raspberry) => {
                 if(raspberry.salle === currentSalle) {
                     return (
                         raspberry.src.map((source, index) => (
@@ -36,7 +36,7 @@ function VideoContainer() {
                     )
                 }
             }
-        )}
+        ) : <NotFound />}
         </div>
     )
 }

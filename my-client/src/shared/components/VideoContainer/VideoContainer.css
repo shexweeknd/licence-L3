@@ -1,4 +1,5 @@
 .videos-container {
+    min-width: 700px;
     max-width: 1300px;
     padding: 0 0;
     display: flex;

@@ -18,8 +18,11 @@ function Nav() {
         setListed(!listed)
     }
 
-    useEffect(async () => {
-        await verifyToken()
+    useEffect( () => {
+        async function verifyOnNav () {
+            await verifyToken()
+        }
+        verifyOnNav()
     }, [])
 
     return (

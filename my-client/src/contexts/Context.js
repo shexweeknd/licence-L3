@@ -21,7 +21,7 @@ export const NavContextProvider = ({ children }) => {
 const SurveillanceContext = createContext({
   data: [],
   currentSalle: "",
-  setCurrentSalle: () => {}, // Fonction fictive initiale
+  setCurrentSalle: () => {},
 });
 
 export const SurveillanceContextProvider = ({ children }) => {
@@ -31,18 +31,23 @@ export const SurveillanceContextProvider = ({ children }) => {
 
   const arrayData = useSelector(state => state.camsReducer).connectedCams
 
-  console.log("arrayData reçu du contexte:" ,arrayData)
+  console.log("arrayData reçu du contexte:" ,arrayData , "avec la taille :", arrayData.length)
 
-  useEffect(async () => {
-    if (data.length === 0) {
-      //Appel API une seule fois
-      const temp = await fetchData("/api/cams/getcams");
-      setData(temp);
-      setCurrentSalle(temp[0].salle)
-      console.log("premier appel API", data)
+  useEffect ( () => {
+    async function firstApiCall() {
+      if (data.length === 0) {
+        //Appel API une seule fois
+        const temp = await fetchData("/api/cams/getcams");
+        console.log("premier appel API", data)
+
+        if (temp.length >> 0) {
+          setData(temp);
+          setCurrentSalle(temp[0].salle)
+        }
+      }
     }
-  },
-  []);
+    firstApiCall();
+  }, [])
 
   setInterval(() => {
     if (data.length !== 0 && arrayData.length !== 0) {
@@ -57,7 +62,8 @@ export const SurveillanceContextProvider = ({ children }) => {
 
 
   return (
-    <SurveillanceContext.Provider value={{ data, currentSalle, setCurrentSalle }}>
+    <SurveillanceContext.Provider value={{ data, setData,
+    currentSalle, setCurrentSalle }}>
       {children}
     </SurveillanceContext.Provider>
   );

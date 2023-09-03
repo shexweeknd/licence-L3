@@ -26,13 +26,12 @@ const registerSocketServer = (server) => {
 
         //fonctions pour enregistrer les ids de la connection socket des users entrants
         newConnectionHandler(socket, io);
-        
-        // emit to every users that those are connected cams
         emitToEveryUsers('emit-camslist', socket, io)
 
         //fonction appelé lors de la déconnexion d'un socket user/cams
         socket.on('disconnect', () => {
             disconnectHandler(socket);
+            emitToEveryUsers('emit-camslist', socket, io)
         })
     });
 

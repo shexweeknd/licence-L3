@@ -9,7 +9,7 @@ const API = axios.create({
 const data = {
   salle: "labo",
   ip: "192.168.10.16",
-  src: ["src1", "src2"],
+  src: ["src1", "src2", "src3", "src4"],
   type: "mp4",
   key: "camera123",
 };

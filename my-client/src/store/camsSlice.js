@@ -15,7 +15,6 @@ export const camsSlice = createSlice({
 
       state.connectedCams = [...state.connectedCams, ...newConnectedCams];
 
-    //   console.log('liste des caméras enregistrés : ', state.connectedCams);
     },
   },
 });

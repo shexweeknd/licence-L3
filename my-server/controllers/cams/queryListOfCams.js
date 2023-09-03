@@ -50,14 +50,13 @@
 //     },
 //   ];
 
-const serverStore = require('../../store/serverStore.js');
-
-const data = serverStore.getActiveCamsConnections()
-
-console.log(data)
+const serverStore = require("../../store/serverStore.js");
 
 const queryListOfCams = async (req, res) => {
-    return res.send(data)
-}
+  const data = serverStore.getActiveCamsConnections();
 
-module.exports = queryListOfCams
+  console.log("queryListOfCams - active cams are :", data);
+  return res.send(data);
+};
+
+module.exports = queryListOfCams;

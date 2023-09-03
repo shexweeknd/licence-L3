@@ -19,7 +19,7 @@ export const connectToSocketServer = ( UserDetails ) => {
     })
 
     socket.on("emit-camslist", async (data) => {
-        console.log(data)
+        console.log("update from socket connexion :", data)
         store.dispatch({
             type: "camsSlice/setConnectedCams",
             payload: data,

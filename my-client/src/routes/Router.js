@@ -4,6 +4,7 @@ import Nav from '../shared/components/Nav/Nav';
 import Logs from '../screens/Logs/Logs';
 import Surveillance from '../screens/Surveillance/Surveillance';
 import Auth from '../screens/Auth/Auth.js';
+import CamsApp from '../screens/CamsApp/CamsApp.js';
 
 import { SurveillanceContextProvider, LogsContextProvider, NavContextProvider } from '../contexts/Context';
 
@@ -51,6 +52,14 @@ const router = createBrowserRouter([
             </>
             )
     },
+    {
+        path: "cams-app",
+        element: (
+            <>
+                <CamsApp/>
+            </>
+        )
+    }
 ])
 
 export default router
