@@ -10,9 +10,9 @@ const validator = require("express-joi-validation").createValidator({});
 // schema pour les appareils caméras voulant s'inscrire dans la liste des caméras connectés
 const postCamsListSchema = Joi.object({
   salle: Joi.string().required(),
-  ip: Joi.string().regex(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/).required(),
-  src: Joi.array().items(Joi.string()).required(),
-  type: Joi.string().required(),
+  // ip: Joi.string().regex(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/).required(),
+  // src: Joi.array(),
+  // type: Joi.string().required(),
   key: Joi.string().required()
 });
 

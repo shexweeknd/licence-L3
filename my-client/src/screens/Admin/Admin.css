@@ -1,0 +1,34 @@
+
+.admin-section {
+    margin-top: 4%;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    text-align: left;
+    width: 100%;
+    height: 90vh;
+}
+
+.admin-section p {
+    padding-left: 15px;
+}
+
+.pending-list-container {
+    width: 100%;
+    background-color: aqua;
+    height: 45%;
+}
+
+.table-container {
+    width: 100%;
+    background-color: blueviolet;
+    height: 45%;
+}
+
+@media screen and (max-width: 768px) {
+    .admin-section {
+        flex-direction: column-reverse;
+        column-count: 1;
+        margin-top: 10%;
+    }
+}

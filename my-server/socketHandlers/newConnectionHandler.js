@@ -9,7 +9,7 @@ const newConnectionHandler = async (socket, io) => {
     console.log(userDetails)
 
     //verification si on a une camera pour la demande de newConnectionHandler
-    if (userDetails.salle && userDetails.ip) {
+    if (userDetails.salle) {
         serverStore.addNewConnectedCams({
             socketId: socket.id,
             camsDetails: userDetails

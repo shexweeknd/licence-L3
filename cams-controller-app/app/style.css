@@ -7,6 +7,11 @@ body {
     justify-content: space-around;
 }
 
+input {
+    width: 80%;
+    height: 60px;
+}
+
 video {
     width: 70%;
     height: auto;

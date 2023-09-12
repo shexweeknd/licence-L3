@@ -1,8 +1,10 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 import Nav from '../shared/components/Nav/Nav';
+import AdminNav from '../shared/components/AdminNav/AdminNav'
 
 import Logs from '../screens/Logs/Logs';
 import Surveillance from '../screens/Surveillance/Surveillance';
+import Admin from '../screens/Admin/Admin';
 import Auth from '../screens/Auth/Auth.js';
 import CamsApp from '../screens/CamsApp/CamsApp.js';
 
@@ -25,6 +27,15 @@ const router = createBrowserRouter([
                 <Auth/>
             </>
             )
+    },
+    {
+        path: "/admin",
+        element: (
+            <>  
+                <AdminNav/>
+                <Admin/>
+            </>
+        )
     },
     {
         path: "/stream",

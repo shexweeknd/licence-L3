@@ -12,10 +12,11 @@ export default function Surveillance() {
     return (
         <>
         <section className="surveillance-section" style={{ display: 'flex', position: 'relative' }}>
-            <NavContextProvider>
+            {/* <NavContextProvider>
                 <IpContainer/>
             </NavContextProvider>
-            <VideoContainer/>
+            <VideoContainer/> */}
+            <video id="cam-stream" className='cam-stream' autoPlay="true" muted="muted"></video>
         </section >
         </>
     )

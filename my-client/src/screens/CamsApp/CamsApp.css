@@ -3,8 +3,15 @@
     height: 100vh;
     display: inline-flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+}
+
+input {
+    font-size: large;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-bottom: 15px;
 }
 
 .start-button {
@@ -12,6 +19,7 @@
     height: auto;
     padding: 5px;
     margin-top: 10px;
+    margin-bottom: 10px;
     border: 1px solid gray;
     border-radius: 5px;
     cursor: pointer;
@@ -24,6 +32,6 @@
 
 .localstream-container {
     position: relative;
-    max-width: 1080px;
-    max-height: 640px;
+    max-width: 720px;
+    max-height: 480px;
 }

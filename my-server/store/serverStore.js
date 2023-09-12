@@ -36,6 +36,16 @@ const removeConnected = (socketId) => {
     console.log("connected cams left: ", connectedCams)
 };
 
+// renvoie tous les sockets utilisateurs présents
+const getUsersSocketsInstances = () => {
+    return connectedUsers
+}
+
+// renvoie tous les sockets cameras présents
+const getCamsSocketsInstances = () => {
+    return connectedCams
+}
+
 // renvoie les connections actives des utilisateurs parmi  les sockets présents
 const getActiveUsersConnections = (userId) => {
     const activeConnections = [];
@@ -63,6 +73,8 @@ module.exports = {
     addNewConnectedUser,
     addNewConnectedCams,
     removeConnected,
+    getUsersSocketsInstances,
+    getCamsSocketsInstances,
     getActiveUsersConnections,
     getActiveCamsConnections,
     setSocketServerInstance,
