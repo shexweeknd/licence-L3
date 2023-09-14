@@ -1,15 +1,15 @@
 // const User = require("../../models/user.js");
-const { getUser } = require("../../models/userSqlite.js");
+const { getUser, setLog } = require("../../models/userSqlite.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const postLogin = async (req, res) => {
-  const { email, password } = await req.body;
+  const { email, password, date } = await req.body;
 
   // const user = await User.findOne({ email: email.toLowerCase() });
   await getUser({ email: email.toLowerCase() })
     .then((response) => {
-      if (bcrypt.compare(password, response.password)) {
+      if (response && bcrypt.compare(password, response.password)) {
         //creation du JWT token
         const token = jwt.sign(
           {
@@ -21,6 +21,10 @@ const postLogin = async (req, res) => {
             expiresIn: "24h",
           }
         );
+
+        //journalisation de concexion
+        setLog({email, date});
+
         return res.status(200).json({
           userDetails: {
             email: response.email,

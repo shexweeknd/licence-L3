@@ -1,6 +1,6 @@
 // const User = require("../../models/user.js");
 const { response } = require("express");
-const { addUser } = require("../../models/userSqlite.js");
+const { registerUser } = require("../../models/userSqlite.js");
 const { getUser } = require("../../models/userSqlite.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -17,7 +17,7 @@ const postRegister = async (req, res) => {
             const hashedPassword = await bcrypt.hash(password, 10)
 
             //creation de l'utilisateur dans la BDD
-            await addUser({
+            await registerUser({
                 email: email.toLowerCase(),
                 username: username,
                 password: hashedPassword

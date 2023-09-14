@@ -25,19 +25,96 @@ const getUser = async ({email}) => {
     //      }
     //  });
 
-    const addUser = async ({ username, email, password }) => {
-        const id = uuidv4();
-      
-        return new Promise((resolve, reject) => {
-          db.run('INSERT INTO user (username, email, password, _id) VALUES (?, ?, ?, ?)', [username, email, password, id], function (err) {
-            if (err) {
-              reject(err);
-            } else {
-              console.log('Nouvel utilisateur ajouté avec l\'ID:', this.lastID);
-              resolve(id); // Renvoie l'id de l'utilisateur ajouté
-            }
-          });
+  const registerUser = async ({ username, email, password }) => {
+    
+      return new Promise((resolve, reject) => {
+        db.run('INSERT INTO pending (username, email, password) VALUES (?, ?, ?)', [username, email, password], function (err) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
         });
-      };
+      });
+    };
 
-module.exports = {getUser, addUser}
+const setLog = async ({email, date}) => {
+  return new Promise((resolve, reject) => {
+    db.run('UPDATE user SET connected = ? WHERE email = ?', [date, email], function (err) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve('Utilisateur: ', this.lastID, " journalisé avec succès");
+      }
+    });
+  });
+}
+
+const getAll = async () => {
+
+  return new Promise((resolve, reject) => {
+    db.all('SELECT * FROM pending', function (err, row) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(row);
+      }
+    });
+  });
+}
+
+const approve = async ({email}) => {
+  return new Promise((resolve, reject) => {
+
+    db.get("SELECT * FROM pending WHERE email = ?", [email], function (err,row) {
+      if (err) {
+        reject(err);
+      } else {
+        console.log(row)
+
+        const username = row.username;
+        const email = row.email;
+        const password = row.password;
+
+        const id = uuidv4();
+
+        db.run("INSERT INTO user (username, email, password, _id) VALUES (?, ?, ?, ?)", [username, email, password, id], async function (err) {
+          if (err) {
+            reject(err);
+          } else {
+            await deny({email});
+            resolve(this.lastID, " was approved and can now connect to the server.")
+          }
+        })
+      }
+    })
+  })
+}
+
+const deny = async ({email}) => {
+ return new Promise((resolve, reject) => {
+  
+  db.run("DELETE FROM pending WHERE email = ?", [email], function (err) {
+    if (err) {
+      reject(err);
+    } else {
+      resolve(this.lastID, " was removed from pendings.")
+    }
+  })
+ })
+}
+
+const deleteUser = async ({email}) => {
+  return new Promise((resolve, reject) => {
+   
+   db.run("DELETE FROM user WHERE email = ?", [email], function (err) {
+     if (err) {
+       reject(err);
+     } else {
+       resolve(this.lastID, " was removed from users.")
+     }
+   })
+  })
+ }
+
+module.exports = {getUser, registerUser, setLog, getAll, approve, deny, deleteUser}

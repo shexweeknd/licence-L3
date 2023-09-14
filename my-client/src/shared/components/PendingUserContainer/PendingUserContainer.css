@@ -1,0 +1,11 @@
+.pending-object {
+    width: 100%;
+    height: 50px;
+    border: solid 2px black;
+    display: flex;
+    align-items: center;
+}
+
+.username {
+    width: 95%;
+}

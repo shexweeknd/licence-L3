@@ -8,6 +8,7 @@ require("dotenv").config();
 
 const authRoutes = require("./routes/authRoutes");
 const camsRoutes = require("./routes/camsRoutes");
+const adminRoutes = require("./routes/adminRoutes.js");
 
 const app = express();
 const port = process.env.PORT || process.env.DEV_PORT;
@@ -24,6 +25,7 @@ app.use(express.json());
 // On envoie une requete à un point de terminaison BASEURL + /api + route
 app.use("/api/auth", authRoutes);
 app.use("/api/cams", camsRoutes);
+app.use("/api/admin", adminRoutes);
 
 // Gestion des erreurs
 app.use((err, req, res, next) => {

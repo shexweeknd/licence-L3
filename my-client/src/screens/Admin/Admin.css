@@ -15,14 +15,20 @@
 
 .pending-list-container {
     width: 100%;
-    background-color: aqua;
     height: 45%;
+    background-color: #121117f5;
+    border-radius: 2px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .table-container {
     width: 100%;
-    background-color: blueviolet;
     height: 45%;
+    background-color: #121117f5;
+    border-radius: 2px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 @media screen and (max-width: 768px) {

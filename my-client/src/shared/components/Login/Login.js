@@ -42,9 +42,13 @@ export default function Login({setIsLogin, toggleAlert, isLoadingPage, setIsLoad
     
     e.preventDefault();
 
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString();
+
     const userData = {
       email: mail,
       password: password,
+      date: formattedDate
     };
 
     authUser(userData).then(
