@@ -1,6 +1,7 @@
 .icon-container {
-    width: 45px;
-    height: 45px;
+    width: 30px;
+    height: 30px;
+    font-size: 0.5em;
     padding: 3px;
     cursor: pointer;
     align-items: center;

@@ -20,7 +20,7 @@ API.interceptors.request.use((config) => {
   return Promise.reject(err);
 });
 
-const token = JSON.parse(localStorage.getItem("userData")).token
+let token = null;
 
 export const fetchData = async (apiLink) => {
     try {
@@ -36,6 +36,7 @@ export const fetchData = async (apiLink) => {
 
 export const getPendings = async () => {
   try {
+    token = JSON.parse(localStorage.getItem("userData")).token
     const response = await API.post('/api/admin/get-all', {token});
 
     return response.data;
@@ -47,6 +48,7 @@ export const getPendings = async () => {
 
 export const getUsers = async () => {
   try {
+    token = JSON.parse(localStorage.getItem("userData")).token
     const response = await API.post('/api/admin/get-users', {token});
 
     return response.data;
@@ -58,6 +60,7 @@ export const getUsers = async () => {
 
 export const approveUser = async ({email}) => {
   try {
+    token = JSON.parse(localStorage.getItem("userData")).token
     const response = await API.post('/api/admin/approve', {email, token});
     return response.data;
   } catch (error) {
@@ -68,6 +71,7 @@ export const approveUser = async ({email}) => {
 
 export const denyUser = async ({email}) => {
   try {
+    token = JSON.parse(localStorage.getItem("userData")).token
     const response = await API.post('/api/admin/deny', {email, token});
     return response.data;
   } catch (error) {
@@ -78,6 +82,7 @@ export const denyUser = async ({email}) => {
 
 export const deleteFromRecord = async (userData) => {
   try {
+    token = JSON.parse(localStorage.getItem("userData")).token
     const response = await API.post('/api/admin/delete-record', {...userData, token});
     return response.data;
   } catch (error) {
