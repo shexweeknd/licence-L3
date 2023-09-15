@@ -4,28 +4,34 @@ const authAdmin = require("../middleware/authAdmin.js");
 
 const adminControllers = require("../controllers/admin/adminControllers.js");
 
-router.get(
-    "/get-all",
-    authAdmin,
-    adminControllers.controllers.getPendings
-)
+router.post(
+  "/get-users",
+  authAdmin,
+  adminControllers.controllers.getUsers
+);
 
 router.post(
-    "/approve",
-    authAdmin,
-    adminControllers.controllers.approvePending
-)
+  "/get-all",
+  authAdmin,
+  adminControllers.controllers.getPendings
+);
 
 router.post(
-    "/deny",
-    authAdmin,
-    adminControllers.controllers.denyPending
-)
+  "/approve",
+  authAdmin,
+  adminControllers.controllers.approvePending
+);
 
 router.post(
-    "/delete-record",
-    authAdmin,
-    adminControllers.controllers.deleteRecord
-)
+  "/deny",
+  authAdmin,
+  adminControllers.controllers.denyPending
+);
 
-module.exports = router
+router.post(
+  "/delete-record",
+  authAdmin,
+  adminControllers.controllers.deleteRecord
+);
+
+module.exports = router;

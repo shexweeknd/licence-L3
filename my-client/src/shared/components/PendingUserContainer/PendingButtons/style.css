@@ -3,10 +3,12 @@
     height: 45px;
     padding: 3px;
     cursor: pointer;
-    align-self: center;
+    align-items: center;
+    justify-content: center;
     right: 0
 }
 
 .icon-container:hover {
-    background: rgba(#510f0f, #f2b4b4, #331515, 1);
+    background: gray;
+    border-radius: 30px;
 }

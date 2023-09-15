@@ -7,5 +7,17 @@
 }
 
 .username {
-    width: 95%;
+    width: 35%;
+    justify-self: left;
+}
+
+.email {
+    width: 35%;
+    justify-self: left;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    width: 30%;
 }

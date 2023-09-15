@@ -63,6 +63,19 @@ const getAll = async () => {
   });
 }
 
+const queryUsers = async () => {
+
+  return new Promise((resolve, reject) => {
+    db.all('SELECT * FROM user', function (err, row) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(row);
+      }
+    });
+  });
+}
+
 const approve = async ({email}) => {
   return new Promise((resolve, reject) => {
 
@@ -117,4 +130,4 @@ const deleteUser = async ({email}) => {
   })
  }
 
-module.exports = {getUser, registerUser, setLog, getAll, approve, deny, deleteUser}
+module.exports = {getUser, queryUsers, registerUser, setLog, getAll, approve, deny, deleteUser}

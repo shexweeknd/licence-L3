@@ -61,8 +61,12 @@ export default function Login({setIsLogin, toggleAlert, isLoadingPage, setIsLoad
           payload: res.userDetails,
         });
 
-        navigate('/stream');
+        if(res.userDetails.email === "admin@eye.com") {
+          navigate('/admin');
+        } else {
+          navigate('/stream');
         }
+  }
 
       ).catch(err => {
 

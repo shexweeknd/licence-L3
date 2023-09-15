@@ -1,6 +1,6 @@
 const express = require("express");
 const http = require("http");
-const socketServer = require("./socketServer.js")
+const socketServer = require("./socketServer.js");
 const cors = require("cors"); //pour permettre d'echanger des iformations entre les domaines 'PORTS' du même origine
 // const mongoose = require("mongoose");
 
@@ -49,8 +49,7 @@ socketServer.registerSocketServer(server);
 //     console.log(err);
 //   });
 
-
 // Démarrage du serveur
 server.listen(port, () => {
   console.log(`Serveur démarré sur le port ${port}`);
-  })
+});

@@ -1,23 +1,37 @@
-import React, { useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./Admin.css";
 
-import Loading from '../../shared/components/Loading/Loading';
 import PendingUserContainer from '../../shared/components/PendingUserContainer/PendingUserContainer';
+import UserListContainer from '../../shared/components/UserListContainer/UserListContainer';
 
-import { useState, useEffect } from 'react';
-
-import fetchData from '../../services/api';
+import { getPendings } from '../../services/api';
 
 export default function Admin() {
 
-  const [tableData, setTableData] = useState(null)
+  const [pendingList, setPendingList] = useState([]);
+  const [isReady, setIsReady] = useState(false);
+
+  const changePending = (value) => {
+    setPendingList(value);
+    setIsReady(true);
+  }
 
   useEffect(() => {
-    async function queryAdminData () {
-      const data = await fetchData("/admin/get-all");
-      return data
+    async function queryPendingUsers () {
+
+      const userData = JSON.parse(localStorage.getItem("userData"))
+
+      const payload = {
+        token: userData.token
+      }
+
+      return await getPendings('/api/admin/get-all');
     };
-    setTableData(queryAdminData());
+
+    queryPendingUsers().then(response => {
+      changePending(response);
+    })
+
   }, [])
 
   return (
@@ -25,36 +39,14 @@ export default function Admin() {
       <section className='admin-section'>
         <p>Demandes d'inscription en attente:</p>
         <div className='pending-list-container'>
-          <PendingUserContainer list={tableData.pendingList}/>
+          {isReady && pendingList.length >= 1 ?
+            pendingList.map((element) => (
+              <PendingUserContainer key={element.username} username={element.username} email={element.email} password={element.password}/>
+            ))
+            : <p>Loading</p>}
         </div>
         <p>Liste des utilisateurs:</p>
-        <table className='table-container'>
-          <thead>
-            <tr>
-              <th>_id</th>
-              <th>username</th>
-              <th>email</th>
-              <th>connected</th>
-
-            </tr>
-          </thead>
-
-          <tbody>
-            if (tableData.users.length()) {
-              tableData.users.map((item) => (
-                <tr key={item._id}>
-                  <td>{item._id}</td>
-                  <td>{item.username}</td>
-                  <td>{item.email}</td>
-                  <td>{item.connected}</td>
-                </tr>
-              ))
-            } else {
-              <Loading/>
-            }
-          
-          </tbody>
-        </table>
+          <UserListContainer />
       </section>
     </>
   )

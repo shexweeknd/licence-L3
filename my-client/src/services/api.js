@@ -20,6 +20,8 @@ API.interceptors.request.use((config) => {
   return Promise.reject(err);
 });
 
+const token = JSON.parse(localStorage.getItem("userData")).token
+
 export const fetchData = async (apiLink) => {
     try {
       const response = await API.get(`${apiLink}`);
@@ -29,6 +31,63 @@ export const fetchData = async (apiLink) => {
       throw error;
     }
   };
+
+// --------------admin----------------
+
+export const getPendings = async () => {
+  try {
+    const response = await API.post('/api/admin/get-all', {token});
+
+    return response.data;
+  } catch (error) {
+    console.error('Une erreur s\'est produite lors de la récupération des données API sur fetchData:', error);
+    throw error;
+  }
+};
+
+export const getUsers = async () => {
+  try {
+    const response = await API.post('/api/admin/get-users', {token});
+
+    return response.data;
+  } catch (error) {
+    console.error('Une erreur s\'est produite lors de la récupération des données API sur fetchData:', error);
+    throw error;
+  }
+};
+
+export const approveUser = async ({email}) => {
+  try {
+    const response = await API.post('/api/admin/approve', {email, token});
+    return response.data;
+  } catch (error) {
+    console.error('Une erreur s\'est produite lors de la création de l\'utilisateur :', error);
+    throw error;
+  }
+}
+
+export const denyUser = async ({email}) => {
+  try {
+    const response = await API.post('/api/admin/deny', {email, token});
+    return response.data;
+  } catch (error) {
+    console.error('Une erreur s\'est produite lors de la création de l\'utilisateur :', error);
+    throw error;
+  }
+}
+
+export const deleteFromRecord = async (userData) => {
+  try {
+    const response = await API.post('/api/admin/delete-record', {...userData, token});
+    return response.data;
+  } catch (error) {
+    console.error('Une erreur s\'est produite lors de la création de l\'utilisateur :', error);
+    throw error;
+  }
+}
+
+// ----------------admin ----------------------
+
 
 export const createUser = async (userData) => {
   try {
