@@ -14,3 +14,15 @@ export const verifyToken = async () => {
         connectToSocketServer(JSON.parse(UserDetails));
     }
 }
+
+export const verifyAdminToken = async () => {
+    const userDetails = JSON.parse(localStorage.getItem('userData'))
+
+    if (!userDetails) {
+        return logout();
+    }
+
+    if(userDetails.email !== "admin@eye.com") {
+        return window.location.pathname = 'stream'
+    }
+}

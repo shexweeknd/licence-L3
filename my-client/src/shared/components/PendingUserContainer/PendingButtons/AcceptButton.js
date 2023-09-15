@@ -1,8 +1,8 @@
 import React from 'react';
 import "./style.css";
 
-export default function AcceptButton() {
+export default function AcceptButton({onClick}) {
   return (
-    <div className='icon-container'>✔️</div>
+    <div onClick={onClick} className='icon-container'>✔️</div>
   )
 }

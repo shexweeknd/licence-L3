@@ -5,18 +5,29 @@ import PendingUserContainer from '../../shared/components/PendingUserContainer/P
 import UserListContainer from '../../shared/components/UserListContainer/UserListContainer';
 
 import { getPendings } from '../../services/api';
+import { verifyAdminToken } from '../../shared/utils/authFunctions';
 
 export default function Admin() {
 
   const [pendingList, setPendingList] = useState([]);
   const [isReady, setIsReady] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const changePending = (value) => {
     setPendingList(value);
     setIsReady(true);
   }
 
+  const refresh = async () => {
+    return await getPendings('/api/admin/get-all').then(response => {
+      changePending(response)
+    })
+  }
+
   useEffect(() => {
+
+    verifyAdminToken()
+
     async function queryPendingUsers () {
 
       const userData = JSON.parse(localStorage.getItem("userData"))
@@ -41,7 +52,7 @@ export default function Admin() {
         <div className='pending-list-container'>
           {isReady && pendingList.length >= 1 ?
             pendingList.map((element) => (
-              <PendingUserContainer key={element.username} username={element.username} email={element.email} password={element.password}/>
+              <PendingUserContainer key={element.username} username={element.username} email={element.email} refresh={()=>refresh()}/>
             ))
             : <p>Loading</p>}
         </div>
