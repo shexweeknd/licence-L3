@@ -8,7 +8,7 @@ import Mp4File from "../../assets/icons/mp4-file.png";
 
 import { useState, useEffect } from "react";
 
-import { getSavingFolder, streamFile, fetchData } from "../../../services/api";
+import { getSavingFolder, fetchData } from "../../../services/api";
 
 // const NODE_ADDR = process.env.NODE_ADDR;
 // console.log(NODE_ADDR)
@@ -60,7 +60,10 @@ const TreeNode = ({ data, niveau }) => {
       const match = url.match(regex);
 
       await fetchData('/api/journaux/metadata', {file: match ? match[1] : ""}).then(response => {
-        console.log("metaData reçu: ", response)
+
+        document.getElementById("delete-button").disabled = false;
+        document.getElementById("download-button").disabled = false;
+
         document.getElementById("metadata-name").textContent = `Nom: ${response.name}`;
         document.getElementById("metadata-date").textContent = `Date: ${response.date}`;
         document.getElementById("metadata-hour").textContent = `Heure: ${response.hour}`;

@@ -17,12 +17,19 @@ router.get(
 
 router.get(
   "/download-file",
+  auth,
   fileControllers.controllers.downloadFile
 );
 
 router.get(
   "/metadata",
   fileControllers.controllers.metaData
+)
+
+router.get(
+  "/delete-file",
+  auth,
+  fileControllers.controllers.remFile
 )
 
 module.exports = router;
