@@ -11,6 +11,11 @@ router.post(
 );
 
 router.get(
+  "/stream-file",
+  fileControllers.controllers.streamFile
+);
+
+router.get(
   "/download-file",
   fileControllers.controllers.downloadFile
 );

@@ -45,7 +45,7 @@ const TreeNode = ({ data, niveau }) => {
   const playVideo = (path) => {
       const videoPlayer = document.getElementById("video-player");
 
-      videoPlayer.src = `${NODE_ADDR}/api/journaux/download-file?filePath=${path}`;
+      videoPlayer.src = `${NODE_ADDR}/api/journaux/stream-file?filePath=${path}`;
     };
 
   return (

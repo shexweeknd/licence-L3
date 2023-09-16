@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const downloadFile = (req, res) => {
+const streamFile = (req, res) => {
   const videoPath = req.query.filePath;
 
   console.log(videoPath)
@@ -27,4 +27,4 @@ const downloadFile = (req, res) => {
   videoStream.pipe(res);
 }
 
-module.exports = downloadFile;
+module.exports = streamFile;
