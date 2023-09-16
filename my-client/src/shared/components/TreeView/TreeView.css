@@ -27,3 +27,7 @@ div.niveau-3 {
     width: 100%;
     padding-left: 25%;
 }
+
+a {
+    cursor: pointer;
+}

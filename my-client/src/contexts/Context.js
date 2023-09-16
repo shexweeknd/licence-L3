@@ -82,8 +82,11 @@ export const LogsContextProvider = ({ children }) => {
   useEffect(() => {
     async function setQuery() {
       try {
+        const unformated = document.getElementsById("video-player").src;
 
-        const arrayMetaData = await fetchData('/api/logs/metadata/video');
+        const file = './'
+
+        const arrayMetaData = await fetchData('/api/journaux/metadata', {file: file});
         setMetaData(arrayMetaData)
 
       } catch (error) {

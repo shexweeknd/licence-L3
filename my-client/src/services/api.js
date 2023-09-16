@@ -22,9 +22,9 @@ API.interceptors.request.use((config) => {
 
 let token = null;
 
-export const fetchData = async (apiLink) => {
+export const fetchData = async (apiLink, payload) => {
     try {
-      const response = await API.get(`${apiLink}`);
+      const response = await API.get(`${apiLink}`, {...payload});
       return response.data;
     } catch (error) {
       console.error('Une erreur s\'est produite lors de la récupération des données API sur fetchData:', error);
@@ -142,6 +142,35 @@ const checkResponseStatus = (exception) => {
   // action lors de l'echec d'execution des middlewares serveurs
   if (responseStatus) {
     (responseStatus === 401  || responseStatus === 403) && logout(); //middleware auth
+  }
+}
+
+//-----------------journalisation-------------------
+export const getSavingFolder = async () => {
+  try {
+    token = JSON.parse(localStorage.getItem("userData")).token
+    return await API.post('/api/journaux/get-saving-folder', {token});
+  } catch (error) {
+    console.log('Impossible d\'obtenir la liste des caméras actifs : ', error);
+    checkResponseStatus(error)
+    throw error;
+  }
+}
+
+export const streamFile = async (filepath) => {
+  try {
+    token = JSON.parse(localStorage.getItem("userData")).token;
+
+    const data = {
+      token,
+      filePath: filepath
+    }
+
+    return await API.get('/api/journaux/download-file', data);
+  } catch (error) {
+    console.log('Impossible d\'obtenir la liste des caméras actifs : ', error);
+    checkResponseStatus(error)
+    throw error;
   }
 }
 

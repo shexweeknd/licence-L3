@@ -9,6 +9,7 @@ import Auth from '../screens/Auth/Auth.js';
 import CamsApp from '../screens/CamsApp/CamsApp.js';
 
 import { SurveillanceContextProvider, LogsContextProvider, NavContextProvider } from '../contexts/Context';
+import Brouillon from './Brouillon';
 
 const router = createBrowserRouter([
     {
@@ -68,6 +69,14 @@ const router = createBrowserRouter([
         element: (
             <>
                 <CamsApp/>
+            </>
+        )
+    },
+    {
+        path: "/brouillon",
+        element: (
+            <>
+                <Brouillon/>
             </>
         )
     }

@@ -5,14 +5,14 @@ import { LogsContext } from '../../../contexts/Context';
 
 export default function LogsVideoContainer() {
 
-    const { name, date, hour, room, ip, size, shape, source, type } = useContext(LogsContext)
+    // const { name, date, hour, room, ip, size, shape, type } = useContext(LogsContext)
+    const { name, date, hour, room, ip, size, shape, type } = {}
 
     return (
         <>
         <div className="logs-video-container">
-            <video controls>
-                <source src={source} type={type}></source>
-            </video>
+            <video id="video-player" controls />
+                {/* <source type={type}></source> */}
             <div className='info'>
                 <div>
                     <p>Nom: {name} </p>

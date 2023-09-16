@@ -1,33 +1,33 @@
-// a modifier car format de l'obj retourné par encore en forme exacte
 const fs = require('fs');
 const path = require('path');
 
-const getFilesList = (dirPath) => {
-  const filesList = {};
+const getFilesList = (currentPath) => {
+  const filesList = fs.readdirSync(currentPath);
+  const result = [];
 
-  const traverseDir = (currentPath, currentObj) => {
-    const files = fs.readdirSync(currentPath);
+  filesList.forEach((file) => {
+    
+    const filePath = path.join(currentPath, file);
+    const fileStat = fs.statSync(filePath);
+    const item = {
+      name: file,
+      path: filePath,
+      type: fileStat.isDirectory() ? 'folder' : 'file',
+    };
 
-    files.forEach((file) => {
-      const filePath = path.join(currentPath, file);
-      const fileStat = fs.statSync(filePath);
+    if (fileStat.isDirectory()) {
+      item.children = getFilesList(filePath);
+    }
 
-      if (fileStat.isFile()) {
-        currentObj[file] = 'file';
-      } else if (fileStat.isDirectory()) {
-        currentObj[file] = {};
-        traverseDir(filePath, currentObj[file]);
-      }
-    });
-  };
+    result.push(item);
+  });
 
-  traverseDir(dirPath, filesList);
-  return filesList;
+  return result;
 };
 
-const directoryPath = '../my-client/src/';
-const listFolder = getFilesList(directoryPath);
+const getFilesListFunction = async (req, res) => {
+  const response = getFilesList('./storage');
+  res.send(response);
+}
 
-console.log(filesList);
-
-module.exports = listFolder;
+module.exports = getFilesListFunction;

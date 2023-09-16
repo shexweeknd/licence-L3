@@ -16,7 +16,7 @@ export default function Surveillance() {
                 <IpContainer/>
             </NavContextProvider>
             <VideoContainer/> */}
-            <video id="cam-stream" className='cam-stream' autoPlay="true" muted="muted"></video>
+            <video id="stream-container" className='cam-stream' autoPlay={true} muted="muted"></video>
         </section >
         </>
     )

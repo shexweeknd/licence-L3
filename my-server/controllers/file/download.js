@@ -1,34 +1,30 @@
-// fichier à modifier
-
-// Module pour gérer les chemins de fichiers
-const path = require('path');
-// Module pour gérer les opérations de fichiers
 const fs = require('fs');
 
-// Fonction pour télécharger un fichier
-const downloadFile = (req, res) => {
-  // Chemin du fichier que vous souhaitez télécharger
-  const filePath = 'path/to/your/file.txt';
+const streamFile = (req, res) => {
+  const videoPath = req.query.filePath;
 
-  // Récupérer le nom du fichier à partir du chemin
-  const fileName = path.basename(filePath);
+  console.log(videoPath)
 
-  // Vérifier si le fichier existe
-  if (fs.existsSync(filePath)) {
-    // Définir les en-têtes de la réponse pour le téléchargement
-    res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
-    res.setHeader('Content-Type', 'application/octet-stream');
-
-    // Créer un flux de lecture du fichier
-    const fileStream = fs.createReadStream(filePath);
-
-    // Envoyer le fichier au client en utilisant le flux de lecture
-    fileStream.pipe(res);
-  } else {
-    // Si le fichier n'existe pas, renvoyer une erreur 404
-    res.status(404).json({ error: 'Fichier non trouvé' });
+  const range = req.headers.range;
+  if (!range) {
+    res.status(400).send("Requires Range header");
   }
-};
 
-// Exporter la fonction downloadFile
-module.exports = downloadFile
+  const videoSize = fs.statSync(videoPath).size;
+  const CHUNK_SIZE = 10 ** 6;
+  const start = Number(range.replace(/\D/g, ""));
+  const end = Math.min(start + CHUNK_SIZE, videoSize - 1);
+  const contentLength = end - start + 1;
+
+  const headers = {
+    "Content-Range": `bytes ${start}-${end}/${videoSize}`,
+    "Accept-Ranges": "bytes",
+    "Content-Length": contentLength,
+    "Content-Type": "video/mp4",
+  };
+  res.writeHead(206, headers);
+  const videoStream = fs.createReadStream(videoPath, { start, end });
+  videoStream.pipe(res);
+}
+
+module.exports = streamFile;

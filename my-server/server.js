@@ -9,6 +9,8 @@ require("dotenv").config();
 const authRoutes = require("./routes/authRoutes");
 const camsRoutes = require("./routes/camsRoutes");
 const adminRoutes = require("./routes/adminRoutes.js");
+const filesRoutes = require("./routes/filesRoutes.js");
+const brouillonRoutes = require('./routes/brouillonRoutes.js')
 
 const app = express();
 const port = process.env.PORT || process.env.DEV_PORT;
@@ -26,6 +28,8 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/cams", camsRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/journaux", filesRoutes);
+app.use("/api/brouillon", brouillonRoutes);
 
 // Gestion des erreurs
 app.use((err, req, res, next) => {

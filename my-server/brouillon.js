@@ -1,30 +1,28 @@
 const fs = require('fs');
-const path = require('path');
 
-const getFilesList = (dirPath) => {
-  const filesList = {};
+const streamFile = (req, res) => {
+  const videoPath = req.query.filePath;
 
-  const traverseDir = (currentPath, currentObj) => {
-    const files = fs.readdirSync(currentPath);
+  const range = req.headers.range;
+  if (!range) {
+    res.status(400).send("Requires Range header");
+  }
 
-    files.forEach((file) => {
-      const filePath = path.join(currentPath, file);
-      const fileStat = fs.statSync(filePath);
+  const videoSize = fs.statSync(videoPath).size;
+  const CHUNK_SIZE = 10 ** 6;
+  const start = Number(range.replace(/\D/g, ""));
+  const end = Math.min(start + CHUNK_SIZE, videoSize - 1);
+  const contentLength = end - start + 1;
 
-      if (fileStat.isFile()) {
-        currentObj[file] = 'file';
-      } else if (fileStat.isDirectory()) {
-        currentObj[file] = {};
-        traverseDir(filePath, currentObj[file]);
-      }
-    });
+  const headers = {
+    "Content-Range": `bytes ${start}-${end}/${videoSize}`,
+    "Accept-Ranges": "bytes",
+    "Content-Length": contentLength,
+    "Content-Type": "video/mp4",
   };
+  res.writeHead(206, headers);
+  const videoStream = fs.createReadStream(videoPath, { start, end });
+  videoStream.pipe(res);
+}
 
-  traverseDir(dirPath, filesList);
-  return filesList;
-};
-
-const directoryPath = '../my-client/src/';
-const filesList = getFilesList(directoryPath);
-
-console.log(filesList);
+module.exports = streamFile;
