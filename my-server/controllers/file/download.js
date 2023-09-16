@@ -1,30 +1,21 @@
 const fs = require('fs');
+const path = require("path");
 
 const downloadFile = (req, res) => {
-  const videoPath = req.query.filePath;
+  const filePath = req.body.file || req.query.filePath
+  const fileName = path.basename(filePath)
 
-  console.log(videoPath)
+  console.log(filePath)
+  console.log(fileName)
 
-  const range = req.headers.range;
-  if (!range) {
-    res.status(400).send("Requires Range header");
-  }
-
-  const videoSize = fs.statSync(videoPath).size;
-  const CHUNK_SIZE = 10 ** 6;
-  const start = Number(range.replace(/\D/g, ""));
-  const end = Math.min(start + CHUNK_SIZE, videoSize - 1);
-  const contentLength = end - start + 1;
-
-  const headers = {
-    "Content-Range": `bytes ${start}-${end}/${videoSize}`,
-    "Accept-Ranges": "bytes",
-    "Content-Length": contentLength,
-    "Content-Type": "video/mp4",
-  };
-  res.writeHead(206, headers);
-  const videoStream = fs.createReadStream(videoPath, { start, end });
-  videoStream.pipe(res);
+  res.download(filePath, fileName, function (err){
+    if (err) {
+     //Handle error, but keep in mind the response may be partially-sent
+     //so check res.headersSent
+    } else {
+     //decrement a download credit, etc.
+    }
+  })
 }
 
 module.exports = downloadFile;

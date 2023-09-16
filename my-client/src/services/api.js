@@ -24,6 +24,7 @@ let token = null;
 
 export const fetchData = async (apiLink, payload) => {
     try {
+      console.log("fetching to :", payload)
       const response = await API.get(`${apiLink}`, {...payload});
       return response.data;
     } catch (error) {
