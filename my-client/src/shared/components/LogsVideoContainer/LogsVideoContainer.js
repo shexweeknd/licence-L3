@@ -11,20 +11,19 @@ export default function LogsVideoContainer() {
     return (
         <>
         <div className="logs-video-container">
-            <video id="video-player" controls />
-                {/* <source type={type}></source> */}
+            <video id="video-player" src={"empty"} controls />
             <div className='info'>
                 <div>
-                    <p>Nom: {name} </p>
-                    <p>Date: {date} </p>
-                    <p>Heure: {hour} </p>
-                    <p>Salle: {room} </p>
+                    <p id="metadata-name">Nom:</p>
+                    <p id="metadata-date">Date:</p>
+                    <p id="metadata-hour">Heure:</p>
+                    <p id="metadata-room">Salle:</p>
                 </div>
 
                 <div>
-                    <p>IP: {ip} </p>
-                    <p>Taille: {size} </p>
-                    <p>Résolution: {shape} </p>
+                    <p id="metadata-ip">IP:</p>
+                    <p id="metadata-taille">Taille:</p>
+                    <p id="metadata-resolution">Résolution:</p>
                 </div>
             </div>
         </div>

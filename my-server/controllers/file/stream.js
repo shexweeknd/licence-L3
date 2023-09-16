@@ -3,8 +3,6 @@ const fs = require('fs');
 const streamFile = (req, res) => {
   const videoPath = req.query.filePath;
 
-  console.log(videoPath)
-
   const range = req.headers.range;
   if (!range) {
     res.status(400).send("Requires Range header");

@@ -79,23 +79,22 @@ export const LogsContextProvider = ({ children }) => {
 
   const [ metaData, setMetaData ] = useState([])
 
-  useEffect(() => {
-    async function setQuery() {
-      try {
-        const unformated = document.getElementsById("video-player").src;
+  async function setQuery() {
+    try {
+      const url = document.getElementsById("video-player").src;
 
-        const file = './'
+      const regex = /=([^&]+)$/;
+      const match = url.match(regex);
 
-        const arrayMetaData = await fetchData('/api/journaux/metadata', {file: file});
-        setMetaData(arrayMetaData)
+      await fetchData('/api/journaux/metadata', {file: match ? match[1] : ""}).then(response => {
+        console.log("metaData reçu: ", metaData)
+        setMetaData(response.data)
+      })
 
-      } catch (error) {
-        // Gérer l'erreur ici
-      }
+    } catch (error) {
+      // Gérer l'erreur ici
     }
-    setQuery()
-  },
-  [])
+  }
 
   return (
     <LogsContext.Provider value={ {...metaData[0]} }>
