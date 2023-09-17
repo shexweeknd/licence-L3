@@ -14,6 +14,9 @@ const API = axios.create({
 let jwtToken = null
 let socket = null
 let peerCam = null
+let mediaRecorder = null
+let date = null
+let recordingInterval = null
 
 export default function CamsApp() {
   const [starting, setStarting] = useState(false);
@@ -55,7 +58,7 @@ export default function CamsApp() {
 
       await verifySocketConnexion()
       
-      socket.emit("webrtc-init")
+      socket.emit("webrtc-init");
 
       socket.on("init-accepted", data => {
 
@@ -85,8 +88,6 @@ export default function CamsApp() {
               console.log("signal emited", signal)
           }
         });
-
-
       })
 
       socket.on("webrtc-signal", signal => {
@@ -103,6 +104,33 @@ export default function CamsApp() {
         console.log(data);
       });
 
+      //sauvegarde des vidéos 
+      // Créez un MediaRecorder avec le MediaStream
+      mediaRecorder = new MediaRecorder(newStream, { timeslice: 2000 });
+
+      socket.emit("start-recording",{salle, date: new Date()});
+
+      console.log("objet mediarecorder : ", mediaRecorder)
+
+      // Événement lorsqu'un morceau de données est disponible
+      mediaRecorder.ondataavailable = (event) => {
+        console.log("sending blob to server....", event.data)
+        if (event.data.size > 0) {
+          socket.emit("recording", {
+            dataSize: event.data.size,
+            fragment: event.data,
+          })
+        }
+      };
+
+      // Commencez l'enregistrement
+      mediaRecorder.start();
+
+      // Boucler l'enregistrement
+      recordingInterval = setInterval(function () {
+        mediaRecorder.requestData();
+      }, 2000); // 1 secondes
+
     }
   };
 
@@ -117,6 +145,11 @@ export default function CamsApp() {
         tracks.forEach((track) => track.stop());
         setStream(null);
         videoRef.current.srcObject = null;
+
+        //arrêt du mediaStream et envoi du dernier chunk
+        mediaRecorder.stop();
+        socket.emit("stop-recording", new Date())
+        clearInterval(recordingInterval);
       }
 
       // envoi d'un signal d'arrêt au server node

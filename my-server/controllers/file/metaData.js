@@ -1,19 +1,34 @@
+const fs = require("fs");
+const path = require("path");
+
 const metaData = async (req, res) => {
-    const file = req.body.file;
+  const filePath = `./${req.body.file}`;
 
-    //TODO create real metaData for response
-
-    const metaData = {
-        name: "background720.mp4",
-        date: "2023-09-16T16:39:00.644Z",
-        hour: "00h:00m:18s",
-        room: "informatique",
-        ip: "127.0.0.1",
-        taille: "15Mb",
-        resolution: "720x640p",
+  fs.stat(filePath, (err, stats) => {
+    if (err) {
+      console.error(
+        "Erreur lors de la lecture des métadonnées du fichier :",
+        err
+      );
+      return res.send("Erreur lors de la lecture des métadonnées du fichier");
     }
 
-    res.send(metaData);
-}
+    const regex = /^[^-]+/;
 
-module.exports = metaData;  
+    const room = path.basename(filePath).match(regex)[0];
+
+    const metaData = {
+      name: path.basename(filePath),
+      creation: stats.birthtime,
+      modification: stats.mtime,
+      room: room,
+      ip: "127.0.0.1",
+      taille: `${stats.size} Octect`,
+      resolution: "720x640p",
+    };
+
+    res.send(metaData);
+  });
+};
+
+module.exports = metaData;

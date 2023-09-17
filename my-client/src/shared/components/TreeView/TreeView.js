@@ -8,7 +8,7 @@ import Mp4File from "../../assets/icons/mp4-file.png";
 
 import { useState, useEffect } from "react";
 
-import { getSavingFolder, fetchData } from "../../../services/api";
+import { getSavingFolder, fetchWithPayload } from "../../../services/api";
 
 // const NODE_ADDR = process.env.NODE_ADDR;
 // console.log(NODE_ADDR)
@@ -59,15 +59,15 @@ const TreeNode = ({ data, niveau }) => {
       const regex = /=([^&]+)$/;
       const match = url.match(regex);
 
-      await fetchData('/api/journaux/metadata', {file: match ? match[1] : ""}).then(response => {
+      await fetchWithPayload('/api/journaux/metadata', {file: match ? match[1] : ""}).then(response => {
 
         document.getElementById("delete-button").disabled = false;
         document.getElementById("download-button").disabled = false;
 
         document.getElementById("metadata-name").textContent = `Nom: ${response.name}`;
-        document.getElementById("metadata-date").textContent = `Date: ${response.date}`;
-        document.getElementById("metadata-hour").textContent = `Heure: ${response.hour}`;
-        document.getElementById("metadata-room").textContent = `Room: ${response.room}`;
+        document.getElementById("metadata-creation").textContent = `Création: ${response.creation}`;
+        document.getElementById("metadata-modification").textContent = `Modification: ${response.modification}`;
+        document.getElementById("metadata-room").textContent = `Salle: ${response.room}`;
 
 
         document.getElementById("metadata-ip").textContent = `IP: ${response.ip}`;

@@ -15,8 +15,8 @@ export default function LogsVideoContainer() {
             <div className='info'>
                 <div>
                     <p id="metadata-name">Nom:</p>
-                    <p id="metadata-date">Date:</p>
-                    <p id="metadata-hour">Heure:</p>
+                    <p id="metadata-creation">Création:</p>
+                    <p id="metadata-modification">Modification:</p>
                     <p id="metadata-room">Salle:</p>
                 </div>
 

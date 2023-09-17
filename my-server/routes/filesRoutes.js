@@ -21,7 +21,7 @@ router.get(
   fileControllers.controllers.downloadFile
 );
 
-router.get(
+router.post(
   "/metadata",
   fileControllers.controllers.metaData
 )

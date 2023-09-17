@@ -22,10 +22,25 @@ API.interceptors.request.use((config) => {
 
 let token = null;
 
-export const fetchData = async (apiLink, payload) => {
+export const fetchWithPayload = async (apiLink, payload) => {
     try {
-      console.log("fetching to :", payload)
-      const response = await API.get(`${apiLink}`, {...payload});
+      token = JSON.parse(localStorage.getItem("userData")).token
+
+      const data = {...payload, token: token}
+
+      console.log("fetchingWIthPayload to :", data)
+
+      const response = await API.post(`${apiLink}`, {...data});
+      return response.data;
+    } catch (error) {
+      console.error('Une erreur s\'est produite lors de la récupération des données API sur fetchData:', error);
+      throw error;
+    }
+  };
+
+  export const fetchData = async (apiLink) => {
+    try {
+      const response = await API.get(`${apiLink}`);
       return response.data;
     } catch (error) {
       console.error('Une erreur s\'est produite lors de la récupération des données API sur fetchData:', error);

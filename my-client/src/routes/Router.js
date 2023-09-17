@@ -73,7 +73,7 @@ const router = createBrowserRouter([
         )
     },
     {
-        path: "/brouillon",
+        path: "brouillon",
         element: (
             <>
                 <Brouillon/>

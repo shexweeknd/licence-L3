@@ -1,10 +1,14 @@
 const authSocket = require("./middleware/authSocket.js");
+
 const newConnectionHandler = require("./socketHandlers/newConnectionHandler.js");
 const disconnectHandler = require('./socketHandlers/disconnectHandler.js');
 const webrtcSignalHandler = require ("./socketHandlers/webrtcSignalHandler.js")
 const webrtcInitHandler = require ("./socketHandlers/webrtcInitHandler.js")
-
 const emitToEveryUsers = require("./socketHandlers/emitToEveryUsers.js")
+const { startRecordingHandler, stopRecordingHandler } = require("./socketHandlers/recordingHandler.js")
+const { recordingHandler } = require("./socketHandlers/recordingHandler.js")
+
+
 const serverStore = require("./store/serverStore.js")
 
 const registerSocketServer = (server) => {
@@ -46,6 +50,20 @@ const registerSocketServer = (server) => {
         socket.on("webrtc-signal", data => {
             webrtcSignalHandler(socket, data.signal)
         })
+
+        //----------------recording-------------
+        socket.on("start-recording", ({salle, date}) => {
+            startRecordingHandler(salle, date);
+        })
+        
+        socket.on("recording", ({dataSize, fragment}) => {
+            recordingHandler({dataSize, fragment});
+        })
+
+        socket.on("stop-recording", (date) => {
+            stopRecordingHandler(date)
+        })
+        //----------------recording-------------
 
         //fonction appelé lors de la déconnexion d'un socket user/cams
         socket.on('disconnect', () => {
