@@ -37,7 +37,7 @@ function Nav() {
                 </div>
                 
                 <div className="link-container">
-                    <Link to="/logs">Serveur Log</Link>
+                    <Link to="/logs">Journaux</Link>
                 </div>
                 
                 <div onClick={() => logout() } className='disconnect-icon container'>

@@ -66,7 +66,7 @@ const getAll = async () => {
 const queryUsers = async () => {
 
   return new Promise((resolve, reject) => {
-    db.all('SELECT * FROM user', function (err, row) {
+    db.all('SELECT * FROM user WHERE email != "admin@eye.com"', function (err, row) {
       if (err) {
         reject(err);
       } else {

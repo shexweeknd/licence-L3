@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import "./Admin.css";
 
-import PendingUserContainer from '../../shared/components/PendingUserContainer/PendingUserContainer';
-import UserListContainer from '../../shared/components/UserListContainer/UserListContainer';
+import PendingUserContainer from "../../shared/components/PendingUserContainer/PendingUserContainer";
+import UserListContainer from "../../shared/components/UserListContainer/UserListContainer";
 
-import { getPendings } from '../../services/api';
-import { verifyAdminToken } from '../../shared/utils/authFunctions';
+import { getPendings } from "../../services/api";
+import { verifyAdminToken } from "../../shared/utils/authFunctions";
 
 export default function Admin() {
-
   const [pendingList, setPendingList] = useState([]);
   const [isReady, setIsReady] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -16,51 +15,55 @@ export default function Admin() {
   const changePending = (value) => {
     setPendingList(value);
     setIsReady(true);
-  }
+  };
 
   const refresh = async () => {
-    return await getPendings('/api/admin/get-all').then(response => {
-      changePending(response)
-    })
-  }
+    return await getPendings("/api/admin/get-all").then((response) => {
+      changePending(response);
+    });
+  };
 
   useEffect(() => {
+    verifyAdminToken();
 
-    verifyAdminToken()
-
-    async function queryPendingUsers () {
-
-      const userData = JSON.parse(localStorage.getItem("userData"))
+    async function queryPendingUsers() {
+      const userData = JSON.parse(localStorage.getItem("userData"));
 
       const payload = {
-        token: userData.token
-      }
+        token: userData.token,
+      };
 
-      return await getPendings('/api/admin/get-all');
-    };
+      return await getPendings("/api/admin/get-all");
+    }
 
-    queryPendingUsers().then(response => {
+    queryPendingUsers().then((response) => {
       changePending(response);
-    })
-
-  }, [])
+    });
+  }, []);
 
   return (
     <>
-      <section className='admin-section'>
+      <section className="admin-section">
         <p>Demandes d'inscription en attente:</p>
-        <div className='pending-list-container'>
-          {isReady && pendingList.length >= 1 ?
+        <div className="pending-list-container">
+          {isReady && pendingList.length >= 1 ? (
             pendingList.map((element) => (
-              <PendingUserContainer key={element.username} username={element.username} email={element.email} refresh={()=>refresh()}/>
+              <PendingUserContainer
+                key={element.username}
+                username={element.username}
+                email={element.email}
+                refresh={() => refresh()}
+              />
             ))
-            : <p>Loading</p>}
+          ) : (
+            <p>Loading</p>
+          )}
         </div>
         <p>Liste des utilisateurs:</p>
-          <UserListContainer />
+        <UserListContainer />
       </section>
     </>
-  )
+  );
 }
 
 // params {users} array , params {pendingList} array

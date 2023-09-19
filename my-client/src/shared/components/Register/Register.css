@@ -49,15 +49,17 @@ label {
 }
 
 .register-form .submit-button:hover {
-    background-color: #282c34;
+    background-color: #0055ff;
 }
 
 .register-form .submit-button:disabled {
-    background-color: #282c34;
+    background-color: #515357;
+    color: rgba(49, 46, 46, 0.741);
 }
 
 .register-form a {
-    font-size: .9em;
+    font-size: .7em;
+    text-align: right;
     transition: color 0.2s ease-in;
 }
 

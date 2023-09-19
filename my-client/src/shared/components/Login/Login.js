@@ -117,6 +117,7 @@ export default function Login({setIsLogin, toggleAlert, isLoadingPage, setIsLoad
         <a onClick={setIsLogin}>S'inscrire</a>
 
         <div className="submit-container">
+          <span>pas de compte ?</span>
           <input
             className="submit-button"
             disabled={!isFormValid}

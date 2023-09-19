@@ -1,0 +1,46 @@
+body {
+  background: #282c34;
+}
+
+.videos-container {
+    min-width: 700px;
+    max-width: 85%;
+    padding: 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    right: 0;
+    position: absolute;
+    margin-top: 15px;
+  }
+  
+.item {
+  flex: 0 0 48%; /* Changer le pourcentage en fonction de vos besoins */
+  cursor: pointer;
+  position: relative;
+  padding: 1px;
+  box-sizing: border-box;
+  border: 1px solid #000000;
+  border-radius: 2%;
+  margin-left: 10px;
+  margin-bottom: 2px;
+  margin-top: 5px
+}
+.item video {
+  width: 100%;
+  position: relative;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  /* Modifier les règles pour les écrans plus petits */
+  .item:first-of-type {
+    flex-basis: 98%; /* Changer la taille en fonction de vos besoins */
+  }
+
+  .item {
+    flex-basis: 30%;
+    margin-left: 0px;
+  }
+}

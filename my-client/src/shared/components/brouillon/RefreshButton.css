@@ -1,0 +1,26 @@
+.refresh-button-container {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.refresh-button-container .refresh-button {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 50px;
+    max-height: 50px;
+    margin: auto;
+}
+.refresh-button-container>p {
+    font-size: large;
+    color: rgb(136, 133, 133)
+}
+
+.refresh-button-container .refresh-button .refresh-icon {
+    position: relative;
+}
