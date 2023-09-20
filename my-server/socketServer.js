@@ -48,7 +48,12 @@ const registerSocketServer = (server) => {
         })
 
         socket.on("webrtc-signal", data => {
-            webrtcSignalHandler(socket, data.signal)
+            webrtcSignalHandler({
+                io: io,
+                sender: socket.id,
+                receiver: data.receiver,
+                signal: data.signal,
+            })
         })
 
         //----------------recording-------------

@@ -70,7 +70,14 @@ export default function CamsApp() {
           config: {
             iceServers: [
               {
-                urls: "stun:stun.l.google.com:19302",
+                urls: "stun:numb.viagenie.ca",
+                username: "sultan1640@gmail.com",
+                credential: "98376683",
+              },
+              {
+                urls: "turn:numb.viagenie.ca",
+                username: "sultan1640@gmail.com",
+                credential: "98376683",
               },
             ],
           },
@@ -82,7 +89,7 @@ export default function CamsApp() {
           if(socket.connected) {
               socket.emit("webrtc-signal", {
                 signal: signal,
-                sender:  socket.id,
+                receiver:  sender,
               });
               
               console.log("signal emited", signal)
@@ -90,8 +97,9 @@ export default function CamsApp() {
         });
       })
 
-      socket.on("webrtc-signal", signal => {
-        peerCam.signal(signal)
+      socket.on("webrtc-signal", ({sender, signal}) => {
+        peerCam.signal(signal);
+        console.log("signaux provenant de ", sender, " enregistrés")
       });
 
       socket.on("connect", () => {

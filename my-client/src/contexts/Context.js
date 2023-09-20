@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { fetchData } from "../services/api.js";
-import { current } from "@reduxjs/toolkit";
 
 const NavContext = createContext({
   listed: true,

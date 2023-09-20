@@ -1,16 +1,12 @@
-const serverStore = require("../store/serverStore.js");
+const webrtcSignalHandler = ({io, sender, receiver, signal}) => {
 
-const webrtcSignalHandler = (socket, signal) => {
+    //conditionne pour que l'émetteur ne reçoit pas ses propres siganaux
+    io.to(receiver).emit("webrtc-signal", {
+        sender: sender,
+        signal: signal,
+    })
 
-    const usersSockets = serverStore.getUsersSocketsInstances().keys();
-
-    for (const socketId of usersSockets) {
-        socket.to(socketId).emit("webrtc-signal", {
-            sender: socket.id,
-            signal: signal
-        })
-    }
-
+    console.log(`signaux de : ${sender} envoyés à : ${receiver}`)
 }
 
 module.exports = webrtcSignalHandler

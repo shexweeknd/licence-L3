@@ -21,26 +21,36 @@ export const connectToSocketServer = ( UserDetails ) => {
         console.log(socket.id);
     })
 
-    socket.on("webrtc-init", data => {
-        console.log("initializing connection from camera :", data.sender)
+    socket.on("webrtc-init", ({sender}) => {
+        console.log("initializing connection from camera :", sender)
 
-        recordPeerObject(data.sender);
+        recordPeerObject(sender);
 
         //configuration du peer concerné
-        peer = getPeer(data.sender);
+        peer = getPeer(sender);
+
+        peer.on("signal", (signal) => {
+            socket.emit("webrtc-signal", {
+              signal: signal,
+              receiver: sender,
+            });
+          });
+
         peer.on("stream", (stream) => {
             //TODO afficher le flux vidéo concerné dans l'UI
-            renderCurrentStream(data.sender, stream)
-
+            renderCurrentStream(sender, stream)
         })
 
+        // envoi de l'event "init-accepted"
         socket.emit("init-accepted", {
             sender: socket.id,
-            receiver: data.sender
-        })
+            receiver: sender,
+        });
+
     });
  
-    socket.on("webrtc-signal", ({sender, signal}) => { 
+    socket.on("webrtc-signal", ({sender, signal}) => {
+        console.log(`signal ${signal} received from : ${sender}`);
         peer.signal(signal)
     })
 
