@@ -28,15 +28,23 @@ const startRecordingHandler = (salle, date) => {
 };
 
 const recordingHandler = ({ dataSize, fragment }) => {
+  try{
     fileStream.write(fragment);
+  } catch (err) {
+    console.error("reprise de l'écriture de la vidéo impossible, veuillez redémarrer votre caméra")
+  }
+    
 };
 
 const stopRecordingHandler = async (date) => {
   console.log("...recording stopped... at:", date);
 
+  try {
     fileStream.end()
-
-  console.log("Fichier enregistré avec succès.");
+    console.log("Fichier enregistré avec succès.");
+  } catch {
+    return
+  }
 };
 
 //----------------fonctions utiles--------------

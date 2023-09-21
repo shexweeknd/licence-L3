@@ -70,12 +70,14 @@ const getActiveCamsConnections = () => {
 }
 
 const getCamsNameFromSocket = (socket) => {
-    const socketId = socket.id;
-
-    connectedCams.forEach((value, key) => {
-        if(key == socketId){
-            return value;
-        }
+    return new Promise((resolve, reject) => {
+        connectedCams.forEach((value, key) => {
+            if(key === socket) {
+                resolve(value.salle);
+            } else {
+                reject("Aucune salle sur cet identifiant.")
+            }
+        })
     })
 }
 

@@ -25,6 +25,11 @@ router.get(
   camsListControllers.controllers.queryListOfCams
 )
 
+router.post(
+  "/nom-de-salle",
+  camsListControllers.controllers.querySalleName
+)
+
 // api pour les appareils des caméras, pas besoin d'authentfier les caméras pour l'instant 
 router.post(
   "/integrate",

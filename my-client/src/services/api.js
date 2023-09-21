@@ -48,6 +48,16 @@ export const fetchWithPayload = async (apiLink, payload) => {
     }
   };
 
+  export const postData = async (apiLink) => {
+    try {
+      const response = await API.post(`${apiLink}`);
+      return response.data;
+    } catch (error) {
+      console.error('Une erreur s\'est produite lors de la récupération des données API sur fetchData:', error);
+      throw error;
+    }
+  };
+
 // --------------admin----------------
 
 export const getPendings = async () => {
@@ -108,7 +118,6 @@ export const deleteFromRecord = async (userData) => {
 }
 
 // ----------------admin ----------------------
-
 
 export const createUser = async (userData) => {
   try {

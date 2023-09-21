@@ -16,7 +16,7 @@ const emitToEveryUsers = async (string, socket, io) => {
             case 'emit-camslist':
                 activeUsers.forEach( socketId => {
                     io.to(socketId).emit(string, activeCams);
-                    console.log("message emited to socket : ", socketId)
+                    // console.log("message emited to socket : ", socketId)
                 })
         }
     } catch (error) {

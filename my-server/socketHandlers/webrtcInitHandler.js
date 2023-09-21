@@ -1,13 +1,13 @@
 const serverStore = require("../store/serverStore.js");
 
-const webrtcInitHandler = (socket) => {
+const webrtcInitHandler = ({io, socketId}) => {
 
     const usersSockets = serverStore.getUsersSocketsInstances().keys();
 
-    for (const socketId of usersSockets) {
+    for (const socketUser of usersSockets) {
 
-        socket.to(socketId).emit("webrtc-init", {
-            sender: socket.id,
+        io.to(socketUser).emit("webrtc-init", {
+            sender: socketId,
         })
     }
 }

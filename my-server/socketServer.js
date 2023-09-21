@@ -4,6 +4,7 @@ const newConnectionHandler = require("./socketHandlers/newConnectionHandler.js")
 const disconnectHandler = require('./socketHandlers/disconnectHandler.js');
 const webrtcSignalHandler = require ("./socketHandlers/webrtcSignalHandler.js")
 const webrtcInitHandler = require ("./socketHandlers/webrtcInitHandler.js")
+const webrtcStopHandler = require ("./socketHandlers/webrtcStopHandler.js")
 const emitToEveryUsers = require("./socketHandlers/emitToEveryUsers.js")
 const { startRecordingHandler, stopRecordingHandler } = require("./socketHandlers/recordingHandler.js")
 const { recordingHandler } = require("./socketHandlers/recordingHandler.js")
@@ -38,11 +39,14 @@ const registerSocketServer = (server) => {
 
         //fonctions appelés pour le webrtc
         socket.on("webrtc-init", () => {
-            webrtcInitHandler(socket)
+            webrtcInitHandler({
+                io: io,
+                socketId: socket.id
+            })
         })
 
         socket.on("init-accepted", ({sender, receiver}) => {
-            socket.to(receiver).emit("init-accepted", {
+            io.to(receiver).emit("init-accepted", {
                 sender: sender
             })
         })
@@ -53,6 +57,19 @@ const registerSocketServer = (server) => {
                 sender: socket.id,
                 receiver: data.receiver,
                 signal: data.signal,
+            })
+        })
+
+        socket.on("webrtc-stop", () => {
+            webrtcStopHandler({
+                io: io,
+                socketId: socket.id
+            })
+        })
+
+        socket.on("webrtc-stop-ack", ({receiver}) => {
+            io.to(receiver).emit("webrtc-stop-ack", {
+                sender: socket.id
             })
         })
 

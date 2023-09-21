@@ -8,18 +8,25 @@ export const recordPeerObject = (sender) => {
         config: {
           iceServers: [
             {
-              urls: "stun:numb.viagenie.ca",
-              username: "sultan1640@gmail.com",
-              credential: "98376683",
+              urls: "stun:stun.l.google.com:19302",
             },
             {
-              urls: "turn:numb.viagenie.ca",
-              username: "sultan1640@gmail.com",
-              credential: "98376683",
-            },
+              url: 'turn:turn.anyfirewall.com:443?transport=tcp',
+              credential: 'webrtc',
+              username: 'webrtc'
+          }
           ],
         },
     }))
+}
+
+export const closePeer = (socketId) => {
+  //suppression de l'objet peer
+  const peer = getPeer(socketId)
+  // peer.destroy() se fait du côté de l'initiateur
+
+  //remove peer from list
+  peers.delete(socketId)
 }
 
 export const getPeer = (socketId) => {
