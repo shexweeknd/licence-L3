@@ -6,12 +6,11 @@ import RefreshButton from './RefreshButton';
 
 function IpContainer() {
 
-  const [currentSalle, setCurrentSalle] = useState("")
-
   const arrayData = useSelector(state => state.webrtcReducer.salles)
 
   const handleClick = (salle) => {
     setCurrentSalle(currentSalle)
+
   }
 
   return (

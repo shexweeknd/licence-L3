@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import './Surveillance.css';
 
@@ -9,11 +9,13 @@ import { NavContextProvider } from '../../contexts/Context';
 
 export default function Surveillance() {
     
+    const [currentSalle, setCurrentSalle] = useState("")
+
     return (
         <>
         <section className="surveillance-section" style={{ display: 'flex', position: 'relative' }}>
-            <IpContainer/>
-            <VideoContainer/>
+            <IpContainer setCurrentSalle={setCurrentSalle}/>
+            <VideoContainer currentSalle={currentSalle}/>
             {/* <video id="stream-container" className='cam-stream' autoPlay={true} muted="muted"></video> */}
         </section >
         </>
