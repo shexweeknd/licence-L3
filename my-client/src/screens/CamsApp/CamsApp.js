@@ -189,8 +189,9 @@ export default function CamsApp() {
       navigator.mediaDevices
         .getUserMedia({
           video: {
-            width: 720,
-            height: 480
+            // deviceId: "47af7a4dbbb95c734ef2619e335112bb2bb3008ceb03626f2e20dd92488f509a",
+            width: 1280,
+            height: 720
           },
           audio: false,
         })

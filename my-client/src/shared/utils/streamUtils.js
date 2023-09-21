@@ -1,5 +1,6 @@
 import { postData } from "../../services/api.js";
 import { store } from "../../store/store.js";
+import { registerStreamOfPeer } from "../../socketClient/webrtcPeersList.js";
 
 export const renderCurrentStream = async (sender, stream) => {
     //get details of current cam socket.id from NodeServer: salle name
@@ -7,13 +8,20 @@ export const renderCurrentStream = async (sender, stream) => {
 
     console.log("current salle name is :", currentCam)
 
-    //TODO add the information of the room to the reducer
+    //add the information of the room to the reducer
     store.dispatch({
         type: "webrtcSlice/pushToSalles",
         payload: {
             salle: currentCam,
             socketId: sender
         }})
+
+    //TODO register the stream to webrtcPeersList
+    registerStreamOfPeer({
+        socketId: sender,
+        stream: stream
+    })
+
     return {message: `la salle ${currentCam} a été ajoutée...`}
     }
 

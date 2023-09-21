@@ -26,25 +26,25 @@ function VideoContainer() {
     return (
         <div className="videos-container">
             <animated.div className="item" style={trail[0]}>
-                <video controls autoPlay>
+                <video autoPlay>
                     <source src={Cam1} type="video/webm"/>
                 </video>
             </animated.div>
 
             <animated.div className="item" style={trail[1]}>
-                <video controls autoPlay>
+                <video autoPlay>
                     <source src={Cam2} type="video/webm"/>
                 </video>
             </animated.div>
 
             <animated.div className="item" style={trail[2]}>
-                <video controls autoPlay>
+                <video autoPlay>
                     <source src={Cam3} type="video/webm"/>
                 </video>
             </animated.div>
 
             <animated.div className="item" style={trail[3]}>
-                <video controls autoPlay>
+                <video autoPlay>
                     <source src={Cam4} type="video/webm"/>
                 </video>
             </animated.div>

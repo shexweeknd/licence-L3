@@ -4,13 +4,12 @@ import { useSelector } from "react-redux";
 
 import RefreshButton from './RefreshButton';
 
-function IpContainer() {
+function IpContainer({currentSalle, callBackOnClick}) {
 
   const arrayData = useSelector(state => state.webrtcReducer.salles)
 
   const handleClick = (salle) => {
-    setCurrentSalle(currentSalle)
-
+    callBackOnClick(salle)
   }
 
   return (

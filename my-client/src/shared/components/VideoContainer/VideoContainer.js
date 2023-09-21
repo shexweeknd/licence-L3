@@ -1,11 +1,12 @@
 import './VideoContainer.css';
-import { useTrail, animated } from 'react-spring'
-import { SurveillanceContext } from '../../../contexts/Context.js';
-import React, { useContext } from 'react';
+import { useTrail, animated } from 'react-spring';
+import React from 'react';
 import NotFound from './NotFound.js';
 
-function VideoContainer() {
-    const { data, currentSalle, setCurrentSalle } = useContext(SurveillanceContext)
+
+import { v4 as uuidv4 } from 'uuid';
+
+function VideoContainer({currentSalle, containerIds}) {
 
     //animation
     const trail = useTrail(4, {
@@ -23,20 +24,14 @@ function VideoContainer() {
 
     return (
         <div className="videos-container">
-            {data.length >> 0 ? data.map((raspberry) => {
-                if(raspberry.salle === currentSalle) {
-                    return (
-                        raspberry.src.map((source, index) => (
-                            <animated.div className="item" key={source} style={trail[index]}>
-                                <video controls>
-                                    <source src={source} type={raspberry.type}></source>
-                                </video>
-                            </animated.div>
-                        ))
-                    )
-                }
+            {containerIds.length >> 0 ? 
+                containerIds.map((socket, index) => (
+                    <animated.div className="item" key={uuidv4()} style={trail[index]}>
+                        <video id={socket}>
+                        </video>
+                    </animated.div>    
+                )): <NotFound/>
             }
-        ) : <NotFound />}
         </div>
     )
 }

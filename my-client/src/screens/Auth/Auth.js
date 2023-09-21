@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Auth.css";
-import VideoBackground from "../../shared/assets/animated/backgroundOrig.mp4";
+import VideoBackground from "../../shared/assets/animated/background720.mp4";
 import Login from "../../shared/components/Login/Login.js";
 import Register from "../../shared/components/Register/Register.js";
 import Alert from "../../shared/components/Alert/Alert.js";

@@ -11,7 +11,7 @@ function IpContainer() {
         <div className="IP-object">
           <div className="voyant active"></div>
           <div className="IP-label">
-            <p className="room-name">Nom: Amphithéatre</p>
+            <p className="room-name">Nom: Informatique</p>
             <p className="room-ip">IP: 127.0.0.1</p>
           </div>
         </div>
@@ -19,7 +19,7 @@ function IpContainer() {
         <div className="IP-object">
           <div className="voyant"></div>
           <div className="IP-label">
-            <p className="room-name">Nom: Informatique</p>
+            <p className="room-name">Nom: Amphithéatre</p>
             <p className="room-ip">IP: 127.0.0.1</p>
           </div>
         </div>        

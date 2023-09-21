@@ -1,6 +1,7 @@
 import Peer from "simple-peer";
 
 let peers = new Map();
+let streams = new Map();
 
 export const recordPeerObject = (sender) => {
     peers.set(sender, new Peer({
@@ -31,4 +32,17 @@ export const closePeer = (socketId) => {
 
 export const getPeer = (socketId) => {
     return peers.get(socketId)
+}
+
+export const registerStreamOfPeer = ({socketId, stream}) => {
+  streams.set(socketId, stream)
+  console.log("stream of current socketid remote peer registered")
+}
+
+export const removeStreamOfPeer = (socketId) => {
+  streams.delete(socketId)
+}
+
+export const getStreamOfPeer = (socketId) => {
+  return streams.get(socketId)
 }
