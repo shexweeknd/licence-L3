@@ -1,8 +1,7 @@
 import { postData } from "../../services/api.js";
 import { store } from "../../store/store.js";
-import { registerStreamOfPeer } from "../../socketClient/webrtcPeersList.js";
 
-export const renderCurrentStream = async (sender, stream) => {
+export const renderCurrentStream = async (sender) => {
     //get details of current cam socket.id from NodeServer: salle name
     const currentCam = await postData(`/api/cams/nom-de-salle/?socketId=${sender}`)
 
@@ -17,10 +16,10 @@ export const renderCurrentStream = async (sender, stream) => {
         }})
 
     //TODO register the stream to webrtcPeersList
-    registerStreamOfPeer({
-        socketId: sender,
-        stream: stream
-    })
+    // registerStreamOfPeer({
+    //     socketId: sender,
+    //     stream: stream
+    // })
 
     return {message: `la salle ${currentCam} a été ajoutée...`}
     }

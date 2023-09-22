@@ -2,6 +2,8 @@ export const configurePeer = (peer) => {
 
     const videoRef = document.getElementById("video")
 
+    peer.on("stream", console.log("stream available"))
+
     peer.on("close", () => {
     //todo remove srcObject localStream
     console.log("on close event called")

@@ -3,9 +3,7 @@ import "./CamsApp.css";
 
 import io from "socket.io-client";
 import axios from "axios";
-
 import Peer from "simple-peer";
-import { configurePeer } from "./peer";
 
 // api pour l'authentification
 const API = axios.create({
@@ -17,6 +15,7 @@ let jwtToken = null
 let socket = null
 let peerCam = null
 let mediaRecorder = null
+let date = null
 let recordingInterval = null
 
 export default function CamsApp() {
@@ -71,13 +70,15 @@ export default function CamsApp() {
           config: {
             iceServers: [
               {
-                urls: "stun:stun.l.google.com:19302",
+                urls: "stun:numb.viagenie.ca",
+                username: "sultan1640@gmail.com",
+                credential: "98376683",
               },
               {
-                url: 'turn:turn.anyfirewall.com:443?transport=tcp',
-                credential: 'webrtc',
-                username: 'webrtc'
-            }
+                urls: "turn:numb.viagenie.ca",
+                username: "sultan1640@gmail.com",
+                credential: "98376683",
+              },
             ],
           },
           stream: newStream,
@@ -95,20 +96,14 @@ export default function CamsApp() {
           }
         });
 
-        configurePeer(peerCam);
+        peerCam.on("connected", () => {
+          console.log("connected successfully")
+        })
       })
 
       socket.on("webrtc-signal", ({sender, signal}) => {
         peerCam.signal(signal);
         console.log("signaux provenant de ", sender, " enregistrés")
-      });
-
-      socket.on("webrtc-stop-ack", ({sender}) => {
-        console.log(`stop signal accepted from ${sender}`)
-        peerCam.destroy()
-        peerCam = null
-
-        socket.close()
       });
 
       socket.on("connect", () => {
@@ -117,11 +112,17 @@ export default function CamsApp() {
         console.log(socket.id);
       });
 
+      socket.on("emit-camslist", async (data) => {
+        console.log(data);
+      });
+
       //sauvegarde des vidéos 
       // Créez un MediaRecorder avec le MediaStream
       mediaRecorder = new MediaRecorder(newStream, { timeslice: 2000 });
 
       socket.emit("start-recording",{salle, date: new Date()});
+
+      console.log("objet mediarecorder : ", mediaRecorder)
 
       // Événement lorsqu'un morceau de données est disponible
       mediaRecorder.ondataavailable = (event) => {
@@ -150,34 +151,21 @@ export default function CamsApp() {
     const button = document.getElementById("start");
 
     if (starting) {
-
-      //retirement du stream dans la paire
-      // peerCam.removeStream(stream)
-
-      //suppression de la paire
-      // peerCam.destroy() ne marche pas
-      // peerCam = null;
-
-      socket.emit("webrtc-stop")
-
       // Arrêt de la surveillance
       if (stream) {
-        //arrêt du mediaStream et envoi du dernier chunk
-        socket.emit("stop-recording", new Date())
-
-        mediaRecorder.stop();
-
-        clearInterval(recordingInterval);
-
-        videoRef.current.srcObject = null;
-
         const tracks = stream.getTracks();
         tracks.forEach((track) => track.stop());
         setStream(null);
+        videoRef.current.srcObject = null;
+
+        //arrêt du mediaStream et envoi du dernier chunk
+        mediaRecorder.stop();
+        socket.emit("stop-recording", new Date())
+        clearInterval(recordingInterval);
       }
 
       // envoi d'un signal d'arrêt au server node
-      // socket.close()
+      socket.close()
 
       let salleName = document.getElementById("salle");
       salleName.disabled = false;
@@ -189,9 +177,8 @@ export default function CamsApp() {
       navigator.mediaDevices
         .getUserMedia({
           video: {
-            // deviceId: "47af7a4dbbb95c734ef2619e335112bb2bb3008ceb03626f2e20dd92488f509a",
-            width: 1280,
-            height: 720
+            width: 720,
+            height: 480
           },
           audio: false,
         })

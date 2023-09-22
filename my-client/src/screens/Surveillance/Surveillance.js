@@ -20,50 +20,61 @@ export default function Surveillance() {
     //récupérer le state du reducer
     const salles = useSelector(state => state.webrtcReducer.salles)
 
-    const renderContainer = async (socketIdsList) => {
-        return new Promise((resolve, reject) => {
-            try {
-                //assigner dynamiquement les socketId aux containers id
-                setContainerIds([...socketIdsList])
+    // const renderContainer = async (socketIdsList) => {
+    //     return new Promise((resolve, reject) => {
+    //         try {
+    //             //assigner dynamiquement les socketId aux containers id
+    //             setContainerIds([...socketIdsList])
 
-                // attendre un peu pour que le rendu des containers soient effectués
-                setTimeout(resolve("success"), 2000)
+    //             // attendre un peu pour que le rendu des containers soient effectués
+    //             setTimeout(resolve("success"), 2000)
 
-            } catch (e) {
-                reject(e)
-            }
-        })
-    }
+    //         } catch (e) {
+    //             reject(e)
+    //         }
+    //     })
+    // }
 
     const callBackOnClick = async (salle) => {
 
-        let socketIdList = []
+        // let socketIdList = []
 
-        salles.forEach(element => {
-            if(element.salle === salle) {
-                element.socketId.forEach(socket => {
-                    socketIdList.push(socket)
-                })
-            }
-        });
+        // salles.forEach(element => {
+        //     if(element.salle === salle) {
+        //         element.socketId.forEach(socket => {
+        //             socketIdList.push(socket)
+        //         })
+        //     }
+        // });
 
-        renderContainer(socketIdList)
-        .then(res => {
-            //récupérer le stream puis afficher
-            socketIdList.forEach(socket => {
-               let stream = getStreamOfPeer(socket)
-               const video = document.querySelector(`#${socket}`)
-               video.srcObject = stream;
-            })
+        // renderContainer(socketIdList)
+        // .then(res => {
+        //     //récupérer le stream puis afficher
+        //     socketIdList.forEach(socket => {
+        //        let stream = getStreamOfPeer(socket)
+        //        const video = document.querySelector(`#${socket}`)
+        //        video.srcObject = stream;
+        //     })
     
             setCurrentSalle(salle);
-        })
-        .catch( err => {
-            console.log(err)
-        }
 
-        )
+            let peer = null;
+            let video = null;
 
+            salles.forEach(element => {
+                if(element.salle === salle) {
+                    element.socketId.forEach( id => {
+                        video = document.getElementById(id)
+                        video.play()
+                    })
+                }
+            })
+        // })
+        // .catch( err => {
+        //     console.log(err)
+        // }
+
+        // )
     }
 
     return (
