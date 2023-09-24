@@ -159,8 +159,7 @@ export default function CamsApp() {
         console.log("stop ack received")
 
         //TODO destroy peer Object
-        // peerCam.destroy()
-        peerCam = null;
+        peerCam.destroy()
 
         // envoi d'un signal d'arrêt au server node
         socket.close()

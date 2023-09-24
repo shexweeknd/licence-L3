@@ -71,7 +71,6 @@ export const connectToSocketServer = ( UserDetails ) => {
         removeSocketFromRedux({socketId: sender})
 
         //TODO close peer connexion
-        peer = null
 
         socket.emit("webrtc-stop-ack", {receiver: sender})
     })
