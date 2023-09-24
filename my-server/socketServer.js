@@ -68,6 +68,8 @@ const registerSocketServer = (server) => {
         })
 
         socket.on("webrtc-stop-ack", ({receiver}) => {
+            console.log(`sending stop ack to : ${receiver}`)
+            
             io.to(receiver).emit("webrtc-stop-ack", {
                 sender: socket.id
             })

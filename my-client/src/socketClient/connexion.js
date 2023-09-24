@@ -3,6 +3,7 @@ import { recordPeerObject, getPeer } from './webrtcPeersList.js';
 import { renderCurrentStream } from '../shared/utils/streamUtils.js';
 
 import io from 'socket.io-client';
+import { removeSocketFromRedux } from '../shared/utils/streamUtils.js';
 
 let socket = null;
 let peer = null
@@ -46,6 +47,10 @@ export const connectToSocketServer = ( UserDetails ) => {
             video.srcObject = stream
         })
 
+        peer.on("close", () => {
+            console.log("close event called")
+        })
+
         // envoi de l'event "init-accepted"
         socket.emit("init-accepted", {
             sender: socket.id,
@@ -57,6 +62,21 @@ export const connectToSocketServer = ( UserDetails ) => {
     socket.on("webrtc-signal", ({sender, signal}) => {
         console.log(`signal ${signal} received from : ${sender}`);
         peer.signal(signal)
+    })
+
+    socket.on("webrtc-stop", ({sender}) => {
+        console.log("stoping webrtc signal received")
+
+        //TODO remove stream from the screen
+        let video = document.getElementById(sender);
+        video.removeAttribute('src');
+        video.load();
+
+        //TODO revome socketId from redux state
+        removeSocketFromRedux({socketId: sender})
+
+        //TODO close peer connexion
+        socket.emit("webrtc-stop-ack", {receiver: sender})
     })
 
     socket.on("emit-camslist", async (data) => {

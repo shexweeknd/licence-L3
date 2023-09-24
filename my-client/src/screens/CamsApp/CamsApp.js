@@ -112,6 +112,10 @@ export default function CamsApp() {
         console.log(socket.id);
       });
 
+      socket.on("webrtc-stop-ack", ({sender}) => {
+        console.log("stop ack received")
+      })
+
       socket.on("emit-camslist", async (data) => {
         console.log(data);
       });
@@ -151,6 +155,9 @@ export default function CamsApp() {
     const button = document.getElementById("start");
 
     if (starting) {
+
+      socket.emit("webrtc-stop")
+
       // Arrêt de la surveillance
       if (stream) {
         const tracks = stream.getTracks();

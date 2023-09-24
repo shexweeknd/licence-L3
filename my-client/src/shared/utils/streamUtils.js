@@ -24,8 +24,7 @@ export const renderCurrentStream = async (sender) => {
     return {message: `la salle ${currentCam} a été ajoutée...`}
     }
 
-export const removeStreamFromScreen = ({socketId}) => {
-    return new Promise(async (resolve, reject) => {
+export const removeSocketFromRedux = async ({socketId}) => {
         const currentCam = await postData(`/api/cams/nom-de-salle/?socketId=${socketId}`)
 
         try {
@@ -37,10 +36,8 @@ export const removeStreamFromScreen = ({socketId}) => {
                     socketId: socketId
                 }
             })
-
-            resolve("removed successfully")
+            console.log(`socket ${socketId} removed from redux`);
         } catch (e) {
-            reject("unable to remove : ", e)
+            console.log(`Unable to remove from redux : ${e}`)
         }
-      });
-}
+      };

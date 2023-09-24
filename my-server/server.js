@@ -1,10 +1,17 @@
 const express = require("express");
+// const https = require("https");
 const http = require("http");
+const fs = require("fs");
 const socketServer = require("./socketServer.js");
 const cors = require("cors"); //pour permettre d'echanger des iformations entre les domaines 'PORTS' du même origine
 // const mongoose = require("mongoose");
 
 require("dotenv").config();
+// const httpsOptions = {
+//   key: fs.readFileSync(`${__dirname}/server.key`),
+//   cert: fs.readFileSync(`${__dirname}/server.crt`),
+//   secureProtocol: 'TLSv1_2_method'
+// };
 
 const authRoutes = require("./routes/authRoutes");
 const camsRoutes = require("./routes/camsRoutes");
@@ -42,7 +49,7 @@ socketServer.registerSocketServer(server);
 
 // mongoose
 //   .connect(process.env.MONGO_URI)
-//   .then(
+//   .then(b
 //     // Démarrage du serveur
 //     server.listen(port, () => {
 //       console.log(`Serveur démarré sur le port ${port}`);
