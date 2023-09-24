@@ -112,10 +112,6 @@ export default function CamsApp() {
         console.log(socket.id);
       });
 
-      socket.on("webrtc-stop-ack", ({sender}) => {
-        console.log("stop ack received")
-      })
-
       socket.on("emit-camslist", async (data) => {
         console.log(data);
       });
@@ -156,7 +152,19 @@ export default function CamsApp() {
 
     if (starting) {
 
-      socket.emit("webrtc-stop")
+      socket.emit("webrtc-stop");
+
+
+      socket.on("webrtc-stop-ack", ({sender}) => {
+        console.log("stop ack received")
+
+        //TODO destroy peer Object
+        // peerCam.destroy()
+        peerCam = null;
+
+        // envoi d'un signal d'arrêt au server node
+        socket.close()
+      })
 
       // Arrêt de la surveillance
       if (stream) {
@@ -170,9 +178,6 @@ export default function CamsApp() {
         socket.emit("stop-recording", new Date())
         clearInterval(recordingInterval);
       }
-
-      // envoi d'un signal d'arrêt au server node
-      socket.close()
 
       let salleName = document.getElementById("salle");
       salleName.disabled = false;

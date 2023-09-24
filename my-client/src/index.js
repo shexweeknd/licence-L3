@@ -6,6 +6,13 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 
+//polyfills pour process is not defined
+import * as process from 'process';
+
+window.global = window;
+window.process = process;
+window.Buffer = [];
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
