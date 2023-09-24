@@ -65,15 +65,13 @@ export const connectToSocketServer = ( UserDetails ) => {
     })
 
     socket.on("webrtc-stop", ({sender}) => {
-        console.log("stoping webrtc signal received")
-
-        //TODO remove stream from the screen
-        let video = document.getElementById(sender);
-        video.removeAttribute('src');
-        video.load();
+        console.log("stoping webrtc signal received from : ", sender)
 
         //TODO revome socketId from redux state
         removeSocketFromRedux({socketId: sender})
+
+        //TODO remove stream from the screen
+        let video = document.getElementById(sender);
 
         //TODO close peer connexion
         socket.emit("webrtc-stop-ack", {receiver: sender})

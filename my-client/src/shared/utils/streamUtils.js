@@ -24,15 +24,12 @@ export const renderCurrentStream = async (sender) => {
     return {message: `la salle ${currentCam} a été ajoutée...`}
     }
 
-export const removeSocketFromRedux = async ({socketId}) => {
-        const currentCam = await postData(`/api/cams/nom-de-salle/?socketId=${socketId}`)
-
+export const removeSocketFromRedux = ({socketId}) => {
         try {
             //suppression de la salle concernée dans le reducer
             store.dispatch({
                 type: "webrtcSlice/removeFromSalles",
                 payload: {
-                    currentCam: currentCam,
                     socketId: socketId
                 }
             })

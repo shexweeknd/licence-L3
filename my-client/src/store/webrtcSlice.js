@@ -71,29 +71,24 @@ export const webrtcSlice = createSlice({
 
     removeFromSalles: (state, action) => {
       let position = null;
-      const currentCam = action.payload.currentCam;
       const socket = action.payload.socketId;
       
       try {
         state.salles.forEach((salleObj, index) => {
 
-          if (salleObj.salle === currentCam) {
-
             state.salles[index].socketId.forEach((content, index) => {
               if (content === socket) {
                 position = index
+                state.salles[index].socketId.splice(position, 1);
               } else {
                 position = null
               }
             })
 
-            state.salles[index].socketId.splice(position, 1);
-
             // verifier si socketId n'est pas vide sinon on supprime la salle du state
             if (state.salles[index].socketId.length === 0) {
               state.salles.splice(index, 1)
             }
-          }
         })
       } catch (e) {
         console.log(e)

@@ -5,8 +5,6 @@ import NotFound from "./NotFound.js";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { v4 as uuidv4 } from "uuid";
-
 function VideoContainer({ currentSalle, containerIds }) {
   //animation
   const trail = useTrail(4, {
