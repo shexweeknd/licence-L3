@@ -8,13 +8,15 @@ import { approveUser, denyUser } from '../../../services/api';
 export default function PendingUserContainer({username, email, refresh}) {
 
   const accept = async () => {
-    approveUser({email});
-    refresh();
+    await approveUser({email}).then(response => {
+      refresh();
+    })
   }
 
   const deny = async () => {
-    denyUser({email});
-    refresh();
+    await denyUser({email}).then(response => {
+      refresh();
+    })
   }
 
   return (

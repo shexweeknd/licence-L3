@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs')
 
 const streamFile = (req, res) => {
   const videoPath = req.query.filePath;

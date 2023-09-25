@@ -18,8 +18,9 @@ export default function Admin() {
   };
 
   const refresh = async () => {
-    return await getPendings("/api/admin/get-all").then((response) => {
+    await getPendings("/api/admin/get-all").then((response) => {
       changePending(response);
+      console.log(response)
     });
   };
 
@@ -52,7 +53,8 @@ export default function Admin() {
                 key={element.username}
                 username={element.username}
                 email={element.email}
-                refresh={() => refresh()}
+                pendingList={pendingList}
+                refresh={refresh}
               />
             ))
           ) : (

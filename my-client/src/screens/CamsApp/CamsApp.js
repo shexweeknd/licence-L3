@@ -99,6 +99,18 @@ export default function CamsApp() {
         peerCam.on("connected", () => {
           console.log("connected successfully")
         })
+
+        peerCam.on("error", error => {
+          console.log(error)
+          peerCam.destroy();
+
+          socket.close();
+
+          window.location.reload(false);
+
+          //TODO technique de reconnexion du WebRTC
+        })
+
       })
 
       socket.on("webrtc-signal", ({sender, signal}) => {
@@ -158,7 +170,7 @@ export default function CamsApp() {
       socket.on("webrtc-stop-ack", ({sender}) => {
         console.log("stop ack received")
 
-        //TODO destroy peer Object
+        // destroy peer Object
         peerCam.destroy()
 
         // envoi d'un signal d'arrêt au server node

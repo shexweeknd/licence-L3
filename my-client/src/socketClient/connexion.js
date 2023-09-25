@@ -48,7 +48,14 @@ export const connectToSocketServer = ( UserDetails ) => {
         })
 
         peer.on("close", () => {
-            console.log("close event called")
+            peer.destroy()
+        })
+
+        peer.on("error", error => {
+            //revome socketId from redux state
+            removeSocketFromRedux({socketId: sender})
+
+            peer.destroy()
         })
 
         // envoi de l'event "init-accepted"
@@ -69,8 +76,6 @@ export const connectToSocketServer = ( UserDetails ) => {
 
         //revome socketId from redux state
         removeSocketFromRedux({socketId: sender})
-
-        //TODO close peer connexion
 
         socket.emit("webrtc-stop-ack", {receiver: sender})
     })
