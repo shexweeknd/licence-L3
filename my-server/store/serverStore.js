@@ -74,6 +74,7 @@ const getCamsNameFromSocket = (socket) => {
         connectedCams.forEach((value, key) => {
             if(key === socket) {
                 resolve(value.salle);
+                // console.log("resolving ...", key, value.salle)
             } else {
                 reject("Aucune salle sur cet identifiant.")
             }

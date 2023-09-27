@@ -1,28 +1,25 @@
 .IP-container {
-    display: inline-flex;
     flex-direction: column;
-    flex-grow: 1;
-    flex-shrink: 1;
     overflow-x: hidden;
     overflow-y: auto;
     scroll-behavior: smooth;
     align-items: center;
-    border-radius: 5px;
     border: 1px solid #000000;
     flex: 0 0 10%;
-    height: 500px;
     width: 10%;
-    margin-left: 10px;
+    min-height: 500px;
     /* margin-top: 30px; */
-    background: #444343;
+    background: #1f1d1d;
     padding: 10px;
+    left: 0px;
     animation-name: toright;
     animation-duration: 1.5s;
-    transition: opacity 1s ease-in-out,
+    transition: opacity 1s ease-in-out;
 }
 
 .IP-object {
     display: inline-flex;
+    cursor: pointer;
     min-width: 125px;
     max-width: 125px;
     margin-right: 15px;

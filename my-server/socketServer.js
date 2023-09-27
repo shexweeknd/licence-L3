@@ -35,7 +35,7 @@ const registerSocketServer = (server) => {
         //fonctions pour enregistrer les ids de la connection socket des users entrants
         newConnectionHandler(socket, io);
 
-        emitToEveryUsers('emit-camslist', socket, io)
+        // emitToEveryUsers('emit-camslist', socket, io)
 
         //fonctions appelés pour le webrtc
         socket.on("webrtc-init", () => {

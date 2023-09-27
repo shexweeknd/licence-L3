@@ -9,7 +9,7 @@ import Auth from '../screens/Auth/Auth.js';
 import CamsApp from '../screens/CamsApp/CamsApp.js';
 
 import { SurveillanceContextProvider, LogsContextProvider, NavContextProvider } from '../contexts/Context';
-import Brouillon from './Brouillon';
+// import Brouillon from './Brouillon';
 
 const router = createBrowserRouter([
     {
@@ -72,15 +72,15 @@ const router = createBrowserRouter([
             </>
         )
     },
-    {
-        path: "brouillon",
-        element: (
-            <>
-                <Nav/>
-                <Brouillon/>
-            </>
-        )
-    }
+    // {
+    //     path: "brouillon",
+    //     element: (
+    //         <>
+    //             <Nav/>
+    //             <Brouillon/>
+    //         </>
+    //     )
+    // }
 ])
 
 export default router

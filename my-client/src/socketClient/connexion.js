@@ -25,9 +25,9 @@ export const connectToSocketServer = ( UserDetails ) => {
     socket.on("webrtc-init", ({sender}) => {
         console.log("initializing connection from camera :", sender)
 
-        recordPeerObject(sender);
+        const {message, salle} = renderCurrentStream(sender);
 
-        renderCurrentStream(sender);
+        recordPeerObject({sender: sender});
 
         //configuration du peer concerné
         peer = getPeer(sender);
@@ -40,7 +40,7 @@ export const connectToSocketServer = ( UserDetails ) => {
           });
 
         peer.on("stream", (stream) => {
-            //TODO afficher le flux vidéo concerné dans l'UI
+            // afficher le flux vidéo concerné dans l'UI
             const video = document.getElementById(sender)
 
             console.log("streaming sur le container :", video)

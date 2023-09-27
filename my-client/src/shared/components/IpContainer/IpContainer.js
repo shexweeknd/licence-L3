@@ -17,6 +17,7 @@ function IpContainer({currentSalle, callBackOnClick}) {
       {arrayData.length >> 0 ? arrayData.map((raspberry) => (
         <div
           className="IP-object"
+          id={raspberry.salle}
           onClick={() => handleClick(raspberry.salle)}
           key={raspberry.salle}
         >

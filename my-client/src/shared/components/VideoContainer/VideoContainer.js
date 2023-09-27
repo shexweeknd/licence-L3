@@ -26,7 +26,7 @@ function VideoContainer({ currentSalle, containerIds }) {
     <div className="videos-container">
       {salles.length >> 0 ? (
         salles.map((element, index) => (
-          <div id={element.salle} key={element.salle} style={{ width: "100%", height: "100%", display: currentSalle === element.salle ? "grid" : "none"}}>
+          <div id={element.salle} key={element.salle} style={{ width: "60%", height: "60%", display: currentSalle === element.salle ? "grid" : "none"}}>
             {element.socketId.map((socket, index) => (
               <div key={socket} className="item">
                 <video id={socket}></video>

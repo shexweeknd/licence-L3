@@ -8,6 +8,8 @@
     flex-wrap: wrap;
     width: 80%;
     height: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px
   }
   
 .item {
@@ -29,6 +31,7 @@
 }
 
 @media (max-width: 768px) {
+  
   /* Modifier les règles pour les écrans plus petits */
   .item:first-of-type {
     flex-basis: 98%; /* Changer la taille en fonction de vos besoins */

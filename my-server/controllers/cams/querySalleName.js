@@ -1,8 +1,11 @@
-const { response } = require("express");
 const { getCamsNameFromSocket } = require("../../store/serverStore.js");
 
+let socketId = null
+
 const querySalleName = async (req, res) => {
-    const socketId = req.body.socketId || req.query.socketId || req.params.socketId
+    socketId = req.body.socketId || req.query.socketId || req.params.socketId
+
+    console.log(`request for salle name calling one time: ${socketId}`)
 
     await getCamsNameFromSocket(socketId).then(response => {
         return res.send(response)

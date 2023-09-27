@@ -1,12 +1,13 @@
 import './NotFound.css';
 import NotFoundGif from './gifs/snake.gif';
+import GarfieldGif from './gifs/garfield.gif';
 import React from 'react';
 
 export default function NotFound() {
   return (
     <div className='notfound-container'>
       <div className="image-container">
-        <img src = {NotFoundGif} />
+        <img src = {GarfieldGif} />
       </div>
       <p><strong>Aucune caméra connectée</strong><br/>
         Veuillez patienter ou rafraichir la page</p>

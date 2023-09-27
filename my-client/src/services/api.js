@@ -53,7 +53,7 @@ export const fetchWithPayload = async (apiLink, payload) => {
       const response = await API.post(`${apiLink}`);
       return response.data;
     } catch (error) {
-      console.error('Une erreur s\'est produite lors de la récupération des données API sur fetchData:', error);
+      console.error('Une erreur s\'est produite lors de la récupération des données API sur postData:', error);
       throw error;
     }
   };

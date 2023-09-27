@@ -5,6 +5,8 @@ export const renderCurrentStream = async (sender) => {
     //get details of current cam socket.id from NodeServer: salle name
     const currentCam = await postData(`/api/cams/nom-de-salle/?socketId=${sender}`)
 
+    console.log(`corresponding salle name of current socket : ${sender} is ${currentCam}`)
+
     console.log("current salle name is :", currentCam)
 
     //add the information of the room to the reducer
@@ -15,13 +17,7 @@ export const renderCurrentStream = async (sender) => {
             socketId: sender
         }})
 
-    //TODO register the stream to webrtcPeersList
-    // registerStreamOfPeer({
-    //     socketId: sender,
-    //     stream: stream
-    // })
-
-    return {message: `la salle ${currentCam} a été ajoutée...`}
+    return {message: `la salle ${currentCam} a été ajoutée...`, salle: currentCam}
     }
 
 export const removeSocketFromRedux = ({socketId}) => {
