@@ -19,7 +19,7 @@ const metaData = async (req, res) => {
 
     const metaData = {
       name: path.basename(filePath),
-      creation: stats.birthtime,
+      creation: stats.mtime, //TODO change into brithTime
       modification: stats.mtime,
       room: room,
       ip: "127.0.0.1",

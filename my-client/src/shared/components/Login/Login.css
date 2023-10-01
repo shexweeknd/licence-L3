@@ -19,7 +19,7 @@ label {
 
 .login-form input {
     font-size: x-large;
-    margin-bottom: 0.8em;
+    margin-bottom: 0;
     border: 2px solid gray;
     border-radius: 4px;
 }
@@ -81,4 +81,21 @@ label {
 
 .login-form span {
     display: none;
+}
+
+/* errors of validations */
+.password-error {
+    text-align: left;
+    color: red;
+    margin: 0;
+    font-size: 0.7em;
+    margin-bottom: 0.8em;
+}
+
+.email-error {
+    text-align: left;
+    color: red;
+    margin: 0;
+    font-size: 0.7em;
+    margin-bottom: 0.8em;
 }

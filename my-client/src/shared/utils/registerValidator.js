@@ -3,7 +3,22 @@ export const validateRegisterForm = ({ username, mail, password1, password2 }) =
     const isMailValid = validateMail(mail);
     const arePasswordsValid = validatePasswords(password1, password2);
   
-    return isUsernameValid.state && isMailValid.state && arePasswordsValid.state;
+    return {
+        username: {
+            message: isUsernameValid.message,
+            status: isUsernameValid.state
+        },
+        email: {
+            message: isMailValid.message,
+            status: isMailValid.state
+        },
+        password: {
+            messsage: arePasswordsValid.message,
+            status: arePasswordsValid.state
+        }
+    }
+
+    // return isUsernameValid.state && isMailValid.state && arePasswordsValid.state;
   };
 
   const validateUsername = (username) => {

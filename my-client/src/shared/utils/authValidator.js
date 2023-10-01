@@ -1,11 +1,21 @@
-export const validateLoginForm = ({ mail, password }) => {
-  const isMailValid = validateMail(mail);
-  const isPasswordValid = validatePassword(password);
+// export const validateLoginForm = ({ mail, password }) => {
+//   const isMailValid = validateMail(mail);
+//   const isPasswordValid = validatePassword(password);
 
-  return isMailValid.state && isPasswordValid.state;
-};
+//   return {
+//     email: {
+//       message: isMailValid.message,
+//       status: isMailValid.state,
+//     },
+//     password: {
+//       message: isPasswordValid.message,
+//       status: isPasswordValid.state
+//     }
+//   }
+//   // return isMailValid.state && isPasswordValid.state;
+// };
 
-const validatePassword = (password) => {
+export const validateLoginPassword = (password) => {
   if (password.length < 8) {
     return {
       state: false,
@@ -23,7 +33,7 @@ const validatePassword = (password) => {
 }
 };
 
-const validateMail = (mail) => {
+export const validateLoginMail = (mail) => {
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   if (!emailPattern.test(mail)) {
     return {
