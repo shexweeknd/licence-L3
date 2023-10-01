@@ -19,9 +19,9 @@ label {
 
 .register-form input {
     font-size: x-large;
-    margin-bottom: 0.8em;
     border: 2px solid gray;
     border-radius: 4px;
+    margin-bottom: 0;
 }
 
 .register-form a {
@@ -81,4 +81,13 @@ label {
 
 .register-form span {
     display: none;
+}
+
+/* errors of validations */
+.error-message {
+    text-align: left;
+    color: red;
+    margin: 0;
+    font-size: 0.7em;
+    margin-bottom: 0.8em;
 }

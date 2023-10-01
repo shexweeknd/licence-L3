@@ -84,15 +84,7 @@ label {
 }
 
 /* errors of validations */
-.password-error {
-    text-align: left;
-    color: red;
-    margin: 0;
-    font-size: 0.7em;
-    margin-bottom: 0.8em;
-}
-
-.email-error {
+.error-message {
     text-align: left;
     color: red;
     margin: 0;

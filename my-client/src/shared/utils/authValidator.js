@@ -1,20 +1,3 @@
-// export const validateLoginForm = ({ mail, password }) => {
-//   const isMailValid = validateMail(mail);
-//   const isPasswordValid = validatePassword(password);
-
-//   return {
-//     email: {
-//       message: isMailValid.message,
-//       status: isMailValid.state,
-//     },
-//     password: {
-//       message: isPasswordValid.message,
-//       status: isPasswordValid.state
-//     }
-//   }
-//   // return isMailValid.state && isPasswordValid.state;
-// };
-
 export const validateLoginPassword = (password) => {
   if (password.length < 8) {
     return {

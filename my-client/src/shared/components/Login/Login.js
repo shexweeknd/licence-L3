@@ -105,7 +105,7 @@ export default function Login({setIsLogin, toggleAlert, isLoadingPage, setIsLoad
           style={mailValidation.state ? {marginBottom: "0.8em"} : errorStyle}
           placeholder="exemple@mail.com"
         />
-        <p id="email-error" className="email-error">{ mailValidation.state ? "" : mailValidation.message }</p>
+        <p className="error-message">{ mailValidation.state ? "" : mailValidation.message }</p>
 
         <label htmlFor="password">Mot de passe:</label>
         <div className="password-container">
@@ -122,7 +122,7 @@ export default function Login({setIsLogin, toggleAlert, isLoadingPage, setIsLoad
             onClick={() => setShown(!shown)}
           ></img>
         </div>
-        <p id="password-error" className="password-error"> { passwordValidation.state ? "" : passwordValidation.message } </p>
+        <p className="error-message"> { passwordValidation.state ? "" : passwordValidation.message } </p>
 
         <a onClick={setIsLogin}>S'inscrire</a>
 
@@ -130,7 +130,7 @@ export default function Login({setIsLogin, toggleAlert, isLoadingPage, setIsLoad
           <span>pas de compte ?</span>
           <input
             className="submit-button"
-            disabled={!mailValidation.state && !passwordValidation.state}
+            disabled={!(mailValidation.state && passwordValidation.state)}
             type="submit"
           />
         </div>

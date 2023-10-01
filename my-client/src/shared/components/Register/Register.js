@@ -4,21 +4,30 @@ import EyePasswordShow from "../../assets/icons/eye-password-show.svg";
 
 import React, { useEffect, useState } from 'react';
 
-import { validateRegisterForm } from '../../utils/registerValidator';
+import { validateRegisterUsername, validateRegisterMail, validateRegisterPassword1, validateRegisterPassword2 } from '../../utils/registerValidator';
 import { createUser } from "../../../services/api";
 
 export default function Register({setIsLogin, toggleAlert, isLoadingPage, setIsLoadingPage}) {
 
+  const [shown, setShown] = useState(false);
+
   const [username, setUsername] = useState(" ");
   const [mail, setMail] = useState(" ");
-  const [shown, setShown] = useState(false);
   const [password1, setPassword1] = useState(" ");
   const [password2, setPassword2] = useState(" ");
-  const [isFormValid, setIsFormValid] = useState(false);
+
+  const [usernameValidation, setUsernameValidation] = useState({message: "", state: false})
+  const [mailValidation, setMailValidation] = useState({message: "", state: false})
+  const [password1Validation, setPassword1Validation] = useState({message: "", state: false})
+  const [password2Validation, setPassword2Validation] = useState({message: "", state: false})
 
   useEffect(()=>{
-    setIsFormValid(validateRegisterForm({username, mail, password1, password2}))
-  }, [username, mail, password1, password2, setIsFormValid])
+    setUsernameValidation(validateRegisterUsername(username));
+    setMailValidation(validateRegisterMail(mail));
+    setPassword1Validation(validateRegisterPassword1(password1));
+    setPassword2Validation(validateRegisterPassword2(password1, password2));
+
+  }, [username, mail, password1, password2])
 
   const handleUsername = (e) => {
     setUsername(e.target.value)
@@ -67,6 +76,10 @@ export default function Register({setIsLogin, toggleAlert, isLoadingPage, setIsL
     setIsLoadingPage(false);
   }
 
+  const errorStyle = {
+    border: "2px solid red"
+  }
+  
   return (
     <>
       <label className="titre" type="title">
@@ -79,16 +92,20 @@ export default function Register({setIsLogin, toggleAlert, isLoadingPage, setIsL
           id="username"
           type="input"
           onChange={handleUsername}
+          style={usernameValidation.state ? {marginBottom: "0.8em"} : errorStyle}
           placeholder="votre nom"
         />
+        <p className='error-message'>{ usernameValidation.state ? "" : usernameValidation.message }</p>
 
         <label htmlFor="mail">Email:</label>
         <input
           id="mail"
           type="input"
           onChange={handleMail}
+          style={mailValidation.state ? {marginBottom: "0.8em"} : errorStyle}
           placeholder="exemple@mail.com"
         />
+        <p className='error-message'>{ mailValidation.state ? "" : mailValidation.message }</p>
 
         <label htmlFor="password1">Definir un mot de passe:</label>
         <div className="password-container">
@@ -96,6 +113,7 @@ export default function Register({setIsLogin, toggleAlert, isLoadingPage, setIsL
             id="password1"
             type={shown ? "text" : "password"}
             onChange={handlePassword1}
+            style={password1Validation.state ? {marginBottom: "0.8em"} : errorStyle}
             placeholder="********"
           />
           <img
@@ -104,6 +122,7 @@ export default function Register({setIsLogin, toggleAlert, isLoadingPage, setIsL
             onClick={() => setShown(!shown)}
           ></img>
         </div>
+        <p className='error-message'>{ password1Validation.state ? "" : password1Validation.message }</p>
 
         <label htmlFor="password2">Retaper le mot de passe:</label>
         <div className="password-container">
@@ -111,6 +130,7 @@ export default function Register({setIsLogin, toggleAlert, isLoadingPage, setIsL
             id="password2"
             type={shown ? "text" : "password"}
             onChange={handlePassword2}
+            style={password2Validation.state ? {marginBottom: "0.8em"} : errorStyle}
             placeholder="********"
           />
           <img
@@ -119,6 +139,7 @@ export default function Register({setIsLogin, toggleAlert, isLoadingPage, setIsL
             onClick={() => setShown(!shown)}
           ></img>
         </div>
+        <p className='error-message'>{ password2Validation.state ? "" : password2Validation.message }</p>
 
         <a onClick={() => {setIsLogin(true)}}>Se connecter</a>
 
@@ -127,7 +148,7 @@ export default function Register({setIsLogin, toggleAlert, isLoadingPage, setIsL
         <div className="submit-container">
           <input
             className="submit-button"
-            disabled={!isFormValid}
+            disabled={!(usernameValidation.state && mailValidation.state && password2Validation.state)}
             type="submit"
           />
         </div>
