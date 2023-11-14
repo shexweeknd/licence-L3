@@ -47,6 +47,11 @@ app.use((err, req, res, next) => {
 const server = http.createServer(app);
 socketServer.registerSocketServer(server);
 
+const autoRemove = require("./utils/autoRemove.js")
+;
+
+autoRemove();
+
 // mongoose
 //   .connect(process.env.MONGO_URI)
 //   .then(b
